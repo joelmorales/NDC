@@ -10,3 +10,6 @@ bin/**
 /bin
 target/**
 /target/**
+.class
+**/*.class
+
