@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by JRT (JR Technologies, Inc.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST/2017.1" targetNamespace="http://www.iata.org/IATA/EDIST/2017.1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.001 " id="IATA_17.1_OneOrder_A4_2.1">
+	<xsd:include schemaLocation="edist_commontypes.xsd"/>
+	<xsd:include schemaLocation="edist_structures.xsd"/>
+	<xsd:include schemaLocation="aidm_commontypes.xsd"/>
+	<xsd:element name="IATA_ServiceDeliveryRQ">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Passengers" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Passenger and Group information.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Passenger" type="PassengerType" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>Any person except members of the crew carried or to be carried with the consent of the carrier, on board of any transport vehicle such as aircraft, train, bus, ship.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Group" type="GroupType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation source="description" xml:lang="en">Group Information.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Service" type="ServiceDetailType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="Segment" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Flight origin/ destination information.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="Departure" minOccurs="0"/>
+							<xsd:element ref="Arrival" minOccurs="0"/>
+							<xsd:element name="MarketingCarrier" type="MarketingCarrierFlightType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation source="description" xml:lang="en">Marketing Carrier information.
+
+Notes: This is the carrier that sells with its own code as part of a code share agreement on a flight that is actually operated by another carrier.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="OperatingCarrier" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation source="description" xml:lang="en">Operating Carrier Information.
+
+Operating Carrier is the carrier that operates a flight with a reference to its own prime flight number.
+
+Note: Operating Carrier may be different from a Marketing Carrier(s), if the flight is actually marketed by another carrier(s) within a codeshare agreement. 
+
+Operating Carrier may not be the AOC holder, in which case, and wherever required, this will need to be disclosed to the customer.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:complexContent>
+										<xsd:extension base="OperatingCarrierFlightType"/>
+									</xsd:complexContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Equipment" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="AircraftCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation source="description" xml:lang="en">Equipment Code. Example: 737
+							
+							Encoding Scheme: IATA/ A4A Equipment Code</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="Name" type="ProperNameSimpleType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation source="description" xml:lang="en">Equipment name. Example: Boeing 737-800</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="EquipmentCode" type="ContextSimpleType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation source="description" xml:lang="en">Airline-specific aircraft equipment code.
+							Example: 737-800</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Order" type="OrderCoreType" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Order information.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="IATA_PayloadStdAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

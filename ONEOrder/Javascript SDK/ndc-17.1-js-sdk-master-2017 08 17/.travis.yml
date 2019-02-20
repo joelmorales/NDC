@@ -1,0 +1,5 @@
+language: node_js
+env:
+  - API_KEY=htxg7pfqj5gaj95y74v4zyfv
+node_js:
+  - "4.2"

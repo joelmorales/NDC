@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IATA_ServiceDeliveryRQ Version="IATA2017.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PrimaryLangID="EN" AltLangID="EN" xmlns="http://www.iata.org/IATA/EDIST/2017.1">
+	<!-- Info about a service type for a specific segment request -->
+	<Service>
+		<ServiceType>
+			<Code>MEL</Code>
+		</ServiceType>
+	</Service>
+	<Segment>
+		<Departure>
+			<AirportCode>LHR</AirportCode>
+			<Date>2017-08-27</Date>
+		</Departure>
+		<MarketingCarrier>
+			<AirlineID>Z9</AirlineID>
+			<Name>Zeus Airlines</Name>
+			<FlightNumber>150</FlightNumber>
+		</MarketingCarrier>
+	</Segment>
+</IATA_ServiceDeliveryRQ>

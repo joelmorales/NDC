@@ -1,0 +1,536 @@
+[
+  {
+    
+    "id": "de82ba7c.253878",
+    "type": "tab",
+    "label": "NDC 17.1/OO Alpha - Simulate change service delivery status",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "da270c1d.b0674",
+    "type": "inject",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 160,
+    "y": 340,
+    "wires": [
+      [
+        "88a3db40.215c88"
+      ]
+    ]
+  },
+  {
+    "id": "26d8d3aa.3dce5c",
+    "type": "http request",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 770,
+    "y": 340,
+    "wires": [
+      [
+        "eddb4feb.c8ecf",
+        "161d495c.d6a997"
+      ]
+    ]
+  },
+  {
+    "id": "d1a7e70a.3ebe08",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1230,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "88a3db40.215c88",
+    "type": "change",
+    "z": "de82ba7c.253878",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 330,
+    "y": 340,
+    "wires": [
+      [
+        "674ad580.a8ccfc"
+      ]
+    ]
+  },
+  {
+    "id": "eddb4feb.c8ecf",
+    "type": "xml",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 970,
+    "y": 340,
+    "wires": [
+      [
+        "d1a7e70a.3ebe08",
+        "655939f7.3ad4a8"
+      ]
+    ]
+  },
+  {
+    "id": "161d495c.d6a997",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 990,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "674ad580.a8ccfc",
+    "type": "template",
+    "z": "de82ba7c.253878",
+    "name": "AirShopRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<CoreQuery>\n\t\t<OriginDestinations>\n\t\t\t<OriginDestination>\n\t\t\t\t<Departure>\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t\t\t<Date>2018-12-20</Date>\n\t\t\t\t</Departure>\n\t\t\t\t<Arrival>\n\t\t\t\t\t<AirportCode>GVA</AirportCode>\n\t\t\t\t</Arrival>\n\t\t\t</OriginDestination>\n\t\t</OriginDestinations>\n\t</CoreQuery>\n\t<Preference>\n\t\t<CabinPreferences>\n\t\t\t<CabinType>\n\t\t\t\t<Code>M</Code>\n\t\t\t</CabinType>\n\t\t</CabinPreferences>\n\t</Preference>\n\t<DataLists>\n\t\t<PassengerList>\n\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t\t<Passenger PassengerID=\"SH2\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t</PassengerList>\n\t</DataLists>\n</AirShoppingRQ>\n",
+    "output": "str",
+    "x": 537,
+    "y": 340,
+    "wires": [
+      [
+        "26d8d3aa.3dce5c"
+      ]
+    ]
+  },
+  {
+    "id": "655939f7.3ad4a8",
+    "type": "change",
+    "z": "de82ba7c.253878",
+    "name": "set responseID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "shoppingResponseID",
+        "pt": "msg",
+        "to": "payload.AirShoppingRS.ShoppingResponseID[0].ResponseID[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 390,
+    "y": 411,
+    "wires": [
+      [
+        "d338f45f.3f00f8"
+      ]
+    ]
+  },
+  {
+    "id": "63fdf2cb.fe4a8c",
+    "type": "template",
+    "z": "de82ba7c.253878",
+    "name": "OrderCreateRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<Query>\n\t\t<Passengers/>\n\t\t<Order>\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"{{shoppingResponseID}}\">\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">1560.02</TotalOfferPrice>\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_2\">\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\n\t\t\t\t</OfferItem>\n\t\t\t</Offer>\n\t\t</Order>\n\t\t<Payments>\n\t\t\t<Payment>\n\t\t\t\t<Method>\n\t\t\t\t\t<PaymentCard>\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\n\t\t\t\t\t\t<CardCode>CA</CardCode>\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\n\t\t\t\t\t\t<CardHolderBillingAddress>\n\t\t\t\t\t\t\t<Street>Waterside</Street>\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\n\t\t\t\t\t\t</CardHolderBillingAddress>\n\t\t\t\t\t\t<Surcharge>\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\n\t\t\t\t\t\t</Surcharge>\n\t\t\t\t\t\t<EffectiveExpireDate>\n\t\t\t\t\t\t\t<Effective>1212</Effective>\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\n\t\t\t\t\t\t</EffectiveExpireDate>\n\t\t\t\t\t</PaymentCard>\n\t\t\t\t</Method>\n\t\t\t\t<Amount Code=\"EUR\">1580.02</Amount>\n\t\t\t</Payment>\n\t\t</Payments>\n\t\t<DataLists>\n\t\t\t<PassengerList>\n\t\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t\t<PTC>ADT</PTC>\n\t\t\t\t\t<Individual>\n\t\t\t\t\t\t<GivenName>Thibaut</GivenName>\n\t\t\t\t\t\t<Surname>RUY</Surname>\n\t\t\t\t\t</Individual>\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\n\t\t\t\t</Passenger>\n\t\t\t</PassengerList>\n\t\t\t<ContactList>\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\n\t\t\t\t\t<EmailAddress>\n\t\t\t\t\t\t<EmailAddressValue>thibautruy@test.com</EmailAddressValue>\n\t\t\t\t\t</EmailAddress>\n\t\t\t\t</ContactInformation>\n\t\t\t</ContactList>\n\t\t</DataLists>\n\t</Query>\n</OrderCreateRQ>\n",
+    "output": "str",
+    "x": 840,
+    "y": 411,
+    "wires": [
+      [
+        "1e671d08.a22ae3"
+      ]
+    ]
+  },
+  {
+    "id": "fa0bda24.35d3a8",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "OrderViewRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1452,
+    "y": 411,
+    "wires": []
+  },
+  {
+    "id": "1e671d08.a22ae3",
+    "type": "http request",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 1090,
+    "y": 411,
+    "wires": [
+      [
+        "9ab8536f.732cb"
+      ]
+    ]
+  },
+  {
+    "id": "d338f45f.3f00f8",
+    "type": "change",
+    "z": "de82ba7c.253878",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 650,
+    "y": 411,
+    "wires": [
+      [
+        "63fdf2cb.fe4a8c"
+      ]
+    ]
+  },
+  {
+    "id": "9ab8536f.732cb",
+    "type": "xml",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1270,
+    "y": 411,
+    "wires": [
+      [
+        "fa0bda24.35d3a8",
+        "eb14cbb.4d06738",
+        "38d3faa6.783116"
+      ]
+    ]
+  },
+  {
+    "id": "1c848646.47f5ca",
+    "type": "catch",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "scope": null,
+    "x": 120,
+    "y": 191,
+    "wires": [
+      [
+        "19b6fad1.5e7175"
+      ]
+    ]
+  },
+  {
+    "id": "19b6fad1.5e7175",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 290,
+    "y": 191,
+    "wires": []
+  },
+  {
+    "id": "5220b651.c5ddd8",
+    "type": "comment",
+    "z": "de82ba7c.253878",
+    "name": "NDC Shop/Order (see Info tab)",
+    "info": "Shop Order - 17.1 - Examples (see info tab for more details)\n\nThis flow is composed of two parts:\n\nPart 1 - AirShoppingRQ returns AirShoppingRS \nPart 2 - OrderCreateRQ returns OrderViewRS",
+    "x": 210,
+    "y": 271,
+    "wires": []
+  },
+  {
+    "id": "c53cc007.ad96b",
+    "type": "comment",
+    "z": "de82ba7c.253878",
+    "name": "NDC 17.1/OO Alpha - Change service delivery status",
+    "info": "",
+    "x": 260,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "eb14cbb.4d06738",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "Service delivery status",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.OrderViewRS.Response[0].Order[0].OrderItems[0].OrderItem[0].Service[0].Status[0]",
+    "x": 1470,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "a2d93f64.1da6b",
+    "type": "template",
+    "z": "de82ba7c.253878",
+    "name": "IATA_ServiceStatusChangeNotificationRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<IATA_ServiceStatusChangeNotificationRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\n  <Order OrderID=\"{{OrderID}}\" Owner=\"Z9\">\n    <OrderItem OrderItemID=\"{{OrderItemID}}\" Owner=\"Z9\">\n      <Service ServiceID=\"{{ServiceID}}\" Owner=\"Z9\">\n        <ServiceStatus>Service Delivery DELIVERED</ServiceStatus>\n      </Service>\n    </OrderItem>\n  </Order>\n</IATA_ServiceStatusChangeNotificationRQ>",
+    "output": "str",
+    "x": 800,
+    "y": 560,
+    "wires": [
+      [
+        "c2ff205.c65e4e",
+        "81384d91.51f51"
+      ]
+    ]
+  },
+  {
+    "id": "38d3faa6.783116",
+    "type": "change",
+    "z": "de82ba7c.253878",
+    "name": "set OrderID OrderItemID ServiceID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "OrderID",
+        "pt": "msg",
+        "to": "payload.OrderViewRS.Response[0].Order[0].$.OrderID",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      },
+      {
+        "t": "set",
+        "p": "OrderItemID",
+        "pt": "msg",
+        "to": "payload.OrderViewRS.Response[0].Order[0].OrderItems[0].OrderItem[0].$.OrderItemID",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "ServiceID",
+        "pt": "msg",
+        "to": "payload.OrderViewRS.Response[0].Order[0].OrderItems[0].OrderItem[0].Service[0].$.ServiceID",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "url",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 230,
+    "y": 560,
+    "wires": [
+      [
+        "5ac7995d.66dab8"
+      ]
+    ]
+  },
+  {
+    "id": "5ac7995d.66dab8",
+    "type": "change",
+    "z": "de82ba7c.253878",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "url",
+        "pt": "msg",
+        "to": "http://iata.api.mashery.com/Zeus/NDC",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 530,
+    "y": 560,
+    "wires": [
+      [
+        "a2d93f64.1da6b"
+      ]
+    ]
+  },
+  {
+    "id": "81384d91.51f51",
+    "type": "http request",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "",
+    "tls": "",
+    "x": 1070,
+    "y": 560,
+    "wires": [
+      [
+        "a69c4c63.6289f",
+        "e162ee01.250fc"
+      ]
+    ]
+  },
+  {
+    "id": "a69c4c63.6289f",
+    "type": "xml",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1250,
+    "y": 560,
+    "wires": [
+      [
+        "af82ed5a.d1b"
+      ]
+    ]
+  },
+  {
+    "id": "af82ed5a.d1b",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1430,
+    "y": 560,
+    "wires": []
+  },
+  {
+    "id": "c2ff205.c65e4e",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1070,
+    "y": 600,
+    "wires": []
+  },
+  {
+    "id": "e162ee01.250fc",
+    "type": "debug",
+    "z": "de82ba7c.253878",
+    "name": "SSCNRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 1260,
+    "y": 600,
+    "wires": []
+  }
+]

@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>org.iata.oo</groupId>
+    <artifactId>oo-parent-pom</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.iata.oo</groupId>
+  <artifactId>oo-jaxb</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>JAXB classes for One order Client</name>
+  <description>JAXB generated classes for NDC Client</description>
+<!--
+  <url>https://github.com/iata-ndc/ndc-java-sdk</url>
+-->
+	<modules>
+		<module>OrderSaleInformationNotificationRQ</module>
+		<module>ServiceDeliveryNotificationRQ</module>
+		<module>ServiceDeliveryRQ</module>
+		<module>ServiceDeliveryRS</module>
+		<module>ServiceStatusChangeNotificationRQ</module>
+	</modules>
+
+  <!--<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>0</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+	            <schemas>
+		            <schema>
+			            <url>all.xsd</url>
+		            </schema>
+	            </schemas>
+              &lt;!&ndash;<schemaDirectory>src/main/resources/</schemaDirectory>&ndash;&gt;
+	            <strict>false</strict>
+	            <catalog>src/main/resources/catalog.cat</catalog>
+              <bindingIncludes>
+                <include>includeall.xjb</include>
+              </bindingIncludes>
+              <schemaIncludes>
+
+                &lt;!&ndash;<include>ServiceDeliveryNotificationRQall.xsd</include>&ndash;&gt;
+
+              </schemaIncludes>
+              &lt;!&ndash;<generatePackage>org.iata.oo.schema.OrderSaleInformationNotificationRQ</generatePackage>&ndash;&gt;&ndash;&gt;
+              <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
+              <extension>true</extension>
+              <args>
+                <arg>-no-header</arg>
+                <arg>-Xxew</arg>
+                <arg>-Xxew:instantiate lazy</arg>
+                <arg>-Xxew:control ${basedir}/src/main/resources/xev_control</arg>
+              </args>
+              <plugins>
+                <plugin>
+                  <groupId>com.github.jaxb-xew-plugin</groupId>
+                  <artifactId>jaxb-xew-plugin</artifactId>
+                  <version>1.9</version>
+                </plugin>
+              </plugins>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+    </plugins>
+  </build>-->
+</project>

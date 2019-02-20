@@ -1,0 +1,437 @@
+[
+  {
+    "id": "a0637a7d.8facc8",
+    "type": "tab",
+    "label": "Zeus NDC 17.2/OO 18.2 Shop Order",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "5cf3ab6d.f03bb4",
+    "type": "inject",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 160,
+    "y": 240,
+    "wires": [
+      [
+        "8a1943f7.59bbb"
+      ]
+    ]
+  },
+  {
+    "id": "d8290746.244978",
+    "type": "http request",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 790,
+    "y": 240,
+    "wires": [
+      [
+        "eb143e7.82c73c",
+        "740927f1.ce8088"
+      ]
+    ]
+  },
+  {
+    "id": "6a85ee1b.af117",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "ShopRS JSON",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1220,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "8a1943f7.59bbb",
+    "type": "change",
+    "z": "a0637a7d.8facc8",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURAPIKEY",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 330,
+    "y": 240,
+    "wires": [
+      [
+        "f4b93168.45713"
+      ]
+    ]
+  },
+  {
+    "id": "eb143e7.82c73c",
+    "type": "xml",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 970,
+    "y": 240,
+    "wires": [
+      [
+        "6a85ee1b.af117",
+        "a0e79d73.a1975",
+        "dcbf8213.cab3a"
+      ]
+    ]
+  },
+  {
+    "id": "740927f1.ce8088",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "ShopRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 980,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "a0e79d73.a1975",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "shoppingResponseID",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.AirShoppingRS.ShoppingResponseID[0].ResponseID[0]",
+    "x": 1240,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "f4b93168.45713",
+    "type": "template",
+    "z": "a0637a7d.8facc8",
+    "name": "AirShopRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AirShoppingRQ EchoToken=\"b3d27f9b-d21d-327c-164e-7fb6776f87b0\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\n  <Document>\n    <Name>ZEUS NDC GATEWAY</Name>\n    <ReferenceVersion>1.0</ReferenceVersion>\n  </Document>\n  <Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n  <CoreQuery>\n    <OriginDestinations>\n      <OriginDestination>\n        <Departure>\n          <AirportCode>LHR</AirportCode>\n          <Date>2018-12-23</Date>\n        </Departure>\n        <Arrival>\n          <AirportCode>BCN</AirportCode>\n        </Arrival>\n      </OriginDestination>\n    </OriginDestinations>\n  </CoreQuery>  \n  <DataLists>\n    <PassengerList>\n      <Passenger PassengerID=\"SH1\">\n        <PTC>ADT</PTC>\n      </Passenger>\n    </PassengerList>\n  </DataLists>\n</AirShoppingRQ>",
+    "output": "str",
+    "x": 550,
+    "y": 240,
+    "wires": [
+      [
+        "d8290746.244978"
+      ]
+    ]
+  },
+  {
+    "id": "dcbf8213.cab3a",
+    "type": "change",
+    "z": "a0637a7d.8facc8",
+    "name": "set responseID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "shoppingResponseID",
+        "pt": "msg",
+        "to": "payload.AirShoppingRS.ShoppingResponseID[0].ResponseID[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      },
+      {
+        "t": "set",
+        "p": "OfferPrice",
+        "pt": "msg",
+        "to": "payload.AirShoppingRS.OffersGroup[0].AirlineOffers[0].Offer[0].OfferItem[0].TotalPriceDetail[0].TotalAmount[0].SimpleCurrencyPrice[0]._",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 530,
+    "y": 320,
+    "wires": [
+      [
+        "d7695ee4.df7b",
+        "e0c88fee.ee14c"
+      ]
+    ]
+  },
+  {
+    "id": "42ddccca.7d17c4",
+    "type": "template",
+    "z": "a0637a7d.8facc8",
+    "name": "OrderCreateRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OrderCreateRQ EchoToken=\"b3d27f9b-d21d-327c-164e-7fb6776f87b0\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\n  <Document>\n    <Name>ZEUS NDC GATEWAY</Name>\n    <ReferenceVersion>1.0</ReferenceVersion>\n  </Document>\n  <Party>\n    <Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n  </Party>\n  <Query>\n    <Order>\n      <Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"{{shoppingResponseID}}\">\n        <TotalOfferPrice Code=\"EUR\">{{OfferPrice}}</TotalOfferPrice>\n        <OfferItem OfferItemID=\"OFFERITEM1_1\">\n          <PassengerRefs>SH1</PassengerRefs>\n        </OfferItem>\n      </Offer>\n    </Order>\n    <Payments>\n      <Payment>\n        <Type>CC</Type>\n        <Method>\n          <PaymentCard>\n            <CardType>CREDIT</CardType>\n            <CardCode>CA</CardCode>\n            <CardNumber>5456912312789555</CardNumber>\n            <SeriesCode>888</SeriesCode>\n\t\t\t<CardHolderName>John Jones</CardHolderName>\n            <CardHolderBillingAddress>\n              <Street>Waterside</Street>\n              <CountryCode>GR</CountryCode>\n            </CardHolderBillingAddress>\n            <Surcharge>\n              <Amount Code=\"EUR\">0.00</Amount>\n            </Surcharge>\n            <EffectiveExpireDate>\n              <Effective>1212</Effective>\n              <Expiration>1220</Expiration>\n            </EffectiveExpireDate>\n          </PaymentCard>\n        </Method>\n        <Amount Code=\"EUR\">{{OfferPrice}}</Amount>\n      </Payment>\n    </Payments>\n    <DataLists>\n      <PassengerList>\n        <Passenger PassengerID=\"SH1\">\n          <PTC>ADT</PTC>\n          <Individual>\n            <GivenName>John</GivenName>\n            <Surname>Jones</Surname>\n          </Individual>\n          <ContactInfoRef>SH1_CONT</ContactInfoRef>\n        </Passenger>\n      </PassengerList>\n      <ContactList>\n        <ContactInformation ContactID=\"SH1_CONT\">\n          <ContactProvided>\n            <EmailAddress>\n              <EmailAddressValue>thibthib@test.com</EmailAddressValue>\n            </EmailAddress>\n          </ContactProvided>\n        </ContactInformation>\n      </ContactList>\n    </DataLists>\n  </Query>\n</OrderCreateRQ>\n",
+    "output": "str",
+    "x": 1000,
+    "y": 340,
+    "wires": [
+      [
+        "51fcbff9.dc9f7",
+        "376bc76b.3e0b38"
+      ]
+    ]
+  },
+  {
+    "id": "d7695ee4.df7b",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "SetresponseID",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 800,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "639fa1e1.7ecab",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "OrderViewRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1580,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "51fcbff9.dc9f7",
+    "type": "http request",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 1230,
+    "y": 340,
+    "wires": [
+      [
+        "e670354b.f224e8",
+        "2a8e4bd9.c4e2e4"
+      ]
+    ]
+  },
+  {
+    "id": "e0c88fee.ee14c",
+    "type": "change",
+    "z": "a0637a7d.8facc8",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOUAPIKEY",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 790,
+    "y": 340,
+    "wires": [
+      [
+        "42ddccca.7d17c4"
+      ]
+    ]
+  },
+  {
+    "id": "f3776ac7.750c98",
+    "type": "inject",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 620,
+    "y": 400,
+    "wires": [
+      [
+        "e0c88fee.ee14c"
+      ]
+    ]
+  },
+  {
+    "id": "376bc76b.3e0b38",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 1210,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "e670354b.f224e8",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "OrderViewRS http",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1450,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "2a8e4bd9.c4e2e4",
+    "type": "xml",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1410,
+    "y": 340,
+    "wires": [
+      [
+        "639fa1e1.7ecab",
+        "f7fed9bb.39ec38"
+      ]
+    ]
+  },
+  {
+    "id": "7fe924b1.dfb0ec",
+    "type": "catch",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "scope": null,
+    "x": 120,
+    "y": 80,
+    "wires": [
+      [
+        "e292c14f.c53b8"
+      ]
+    ]
+  },
+  {
+    "id": "e292c14f.c53b8",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "Error",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 310,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "ebbc43e1.42be7",
+    "type": "comment",
+    "z": "a0637a7d.8facc8",
+    "name": "Shop Order - 17.2 - Examples (see info tab for more details)",
+    "info": "This flow is composed of two parts:\n\nPart 1 - AirShoppingRQ returns AirShoppingRS\nPart 2 - OrderCreateRQ returns OrderViewRS\n",
+    "x": 280,
+    "y": 20,
+    "wires": [],
+    "icon": "node-red/watch.png"
+  },
+  {
+    "id": "f7fed9bb.39ec38",
+    "type": "debug",
+    "z": "a0637a7d.8facc8",
+    "name": "OrderID",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.OrderViewRS.Response[0].Order[0].$.OrderID",
+    "x": 1560,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "d2613ae2.7098f8",
+    "type": "http in",
+    "z": "a0637a7d.8facc8",
+    "name": "",
+    "url": "/ShopOrder",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 170,
+    "y": 460,
+    "wires": [
+      [
+        "8a1943f7.59bbb"
+      ]
+    ]
+  }
+]

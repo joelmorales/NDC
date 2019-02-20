@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IATA_ServiceDeliveryRQ Version="IATA2017.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PrimaryLangID="EN" AltLangID="EN" xmlns="http://www.iata.org/IATA/EDIST/2017.1">
+	<!-- Info about a service type for a specific order request -->
+	<Service>
+		<ServiceType>
+			<Code>BAG</Code>
+		</ServiceType>
+	</Service>
+	<Order OrderID="A12346SG8"/>
+</IATA_ServiceDeliveryRQ>

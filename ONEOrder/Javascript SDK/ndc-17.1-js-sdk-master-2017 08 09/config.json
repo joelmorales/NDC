@@ -1,0 +1,26 @@
+{
+  "currencyCode": "USD",
+  "countryCode": "US",
+  "cityCode": "NYC",
+  "providerName": "ZEUS NDC GATEWAY",
+  "endpoint": "<http://iata.api.mashery.com/Zeus/NDC>",
+  "APIAuthKey": "XXXXXXXXXXXXXXX",
+  "agent": {
+    "IATANumber": "0000XXXX",
+    "name": "IATA Developer",
+    "id": "developer.test",
+    "type": "Hackathon Agent",
+    "email": "me@my.domain.com"
+  },
+  "sender": {
+    "id": "Z9",
+    "name": "Zeus Airlines",
+    "type": "Airline Agent",
+    "email": "test@example.org",
+    "IATANumber": "00000001"
+  },
+  "airline": {
+    "id": "Z9",
+    "name": "Zeus Airlines"
+  }
+}

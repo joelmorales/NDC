@@ -1,0 +1,514 @@
+[
+  {
+    "id": "93c6c8f7.51c618",
+    "type": "tab",
+    "label": "NDC 17.1/OO Alpha - Get OSIN",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "8b5346fd.7d9c88",
+    "type": "inject",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 160,
+    "y": 340,
+    "wires": [
+      [
+        "3b57ab29.53a264"
+      ]
+    ]
+  },
+  {
+    "id": "9eef8771.acf0a8",
+    "type": "http request",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 770,
+    "y": 340,
+    "wires": [
+      [
+        "471203d0.0848fc",
+        "61595ba7.3f71b4"
+      ]
+    ]
+  },
+  {
+    "id": "9135d905.9d39a8",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1230,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "3b57ab29.53a264",
+    "type": "change",
+    "z": "93c6c8f7.51c618",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 330,
+    "y": 340,
+    "wires": [
+      [
+        "1009d608.7c11ca"
+      ]
+    ]
+  },
+  {
+    "id": "471203d0.0848fc",
+    "type": "xml",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 970,
+    "y": 340,
+    "wires": [
+      [
+        "9135d905.9d39a8",
+        "eed08b7e.bb0c68"
+      ]
+    ]
+  },
+  {
+    "id": "61595ba7.3f71b4",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 790,
+    "y": 291,
+    "wires": []
+  },
+  {
+    "id": "1009d608.7c11ca",
+    "type": "template",
+    "z": "93c6c8f7.51c618",
+    "name": "AirShopRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<CoreQuery>\n\t\t<OriginDestinations>\n\t\t\t<OriginDestination>\n\t\t\t\t<Departure>\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t\t\t<Date>2017-08-27</Date>\n\t\t\t\t</Departure>\n\t\t\t\t<Arrival>\n\t\t\t\t\t<AirportCode>BCN</AirportCode>\n\t\t\t\t</Arrival>\n\t\t\t</OriginDestination>\n\t\t</OriginDestinations>\n\t</CoreQuery>\n\t<Preference>\n\t\t<CabinPreferences>\n\t\t\t<CabinType>\n\t\t\t\t<Code>M</Code>\n\t\t\t</CabinType>\n\t\t</CabinPreferences>\n\t</Preference>\n\t<DataLists>\n\t\t<PassengerList>\n\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t\t<Passenger PassengerID=\"SH2\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t</PassengerList>\n\t</DataLists>\n</AirShoppingRQ>\n",
+    "output": "str",
+    "x": 537,
+    "y": 340,
+    "wires": [
+      [
+        "9eef8771.acf0a8"
+      ]
+    ]
+  },
+  {
+    "id": "eed08b7e.bb0c68",
+    "type": "change",
+    "z": "93c6c8f7.51c618",
+    "name": "set responseID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "shoppingResponseID",
+        "pt": "msg",
+        "to": "payload.AirShoppingRS.ShoppingResponseID[0].ResponseID[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 390,
+    "y": 411,
+    "wires": [
+      [
+        "1f0720a0.768e3f"
+      ]
+    ]
+  },
+  {
+    "id": "ea7cae28.f4fef",
+    "type": "template",
+    "z": "93c6c8f7.51c618",
+    "name": "adminOrderCreateRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<Query>\n\t\t<Passengers/>\n\t\t<Order>\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"{{shoppingResponseID}}\">\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">1560.02</TotalOfferPrice>\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_2\">\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\n\t\t\t\t</OfferItem>\n\t\t\t</Offer>\n\t\t</Order>\n\t\t<Payments>\n\t\t\t<Payment>\n\t\t\t\t<Method>\n\t\t\t\t\t<PaymentCard>\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\n\t\t\t\t\t\t<CardCode>CA</CardCode>\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\n\t\t\t\t\t\t<CardHolderBillingAddress>\n\t\t\t\t\t\t\t<Street>Waterside</Street>\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\n\t\t\t\t\t\t</CardHolderBillingAddress>\n\t\t\t\t\t\t<Surcharge>\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\n\t\t\t\t\t\t</Surcharge>\n\t\t\t\t\t\t<EffectiveExpireDate>\n\t\t\t\t\t\t\t<Effective>1212</Effective>\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\n\t\t\t\t\t\t</EffectiveExpireDate>\n\t\t\t\t\t</PaymentCard>\n\t\t\t\t</Method>\n\t\t\t\t<Amount Code=\"EUR\">1580.02</Amount>\n\t\t\t</Payment>\n\t\t</Payments>\n\t\t<DataLists>\n\t\t\t<PassengerList>\n\t\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t\t<PTC>ADT</PTC>\n\t\t\t\t\t<Individual>\n\t\t\t\t\t\t<GivenName>Thibaut</GivenName>\n\t\t\t\t\t\t<Surname>RUY</Surname>\n\t\t\t\t\t</Individual>\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\n\t\t\t\t</Passenger>\n\t\t\t</PassengerList>\n\t\t\t<ContactList>\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\n\t\t\t\t\t<EmailAddress>\n\t\t\t\t\t\t<EmailAddressValue>thibautruy@test.com</EmailAddressValue>\n\t\t\t\t\t</EmailAddress>\n\t\t\t\t</ContactInformation>\n\t\t\t</ContactList>\n\t\t</DataLists>\n\t</Query>\n</OrderCreateRQ>\n",
+    "output": "str",
+    "x": 860,
+    "y": 411,
+    "wires": [
+      [
+        "205cde39.b60172",
+        "fe104204.15edb"
+      ]
+    ]
+  },
+  {
+    "id": "ee16e9e0.9ec568",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "OrderViewRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1440,
+    "y": 411,
+    "wires": []
+  },
+  {
+    "id": "205cde39.b60172",
+    "type": "http request",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 1090,
+    "y": 411,
+    "wires": [
+      [
+        "b0f8e65d.38f568"
+      ]
+    ]
+  },
+  {
+    "id": "1f0720a0.768e3f",
+    "type": "change",
+    "z": "93c6c8f7.51c618",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 650,
+    "y": 411,
+    "wires": [
+      [
+        "ea7cae28.f4fef"
+      ]
+    ]
+  },
+  {
+    "id": "fe104204.15edb",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 810,
+    "y": 471,
+    "wires": []
+  },
+  {
+    "id": "b0f8e65d.38f568",
+    "type": "xml",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1270,
+    "y": 411,
+    "wires": [
+      [
+        "ee16e9e0.9ec568",
+        "9c47f368.46fad"
+      ]
+    ]
+  },
+  {
+    "id": "e74115c1.435d58",
+    "type": "catch",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "scope": null,
+    "x": 120,
+    "y": 191,
+    "wires": [
+      [
+        "ca1b772c.645998"
+      ]
+    ]
+  },
+  {
+    "id": "ca1b772c.645998",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 290,
+    "y": 191,
+    "wires": []
+  },
+  {
+    "id": "7577ccac.2ea6f4",
+    "type": "comment",
+    "z": "93c6c8f7.51c618",
+    "name": "NDC Shop/Order",
+    "info": "Shop Order - 17.1 - Examples (see info tab for more details)\n\nThis flow is composed of two parts:\n\nPart 1 - AirShoppingRQ returns AirShoppingRS \nPart 2 - OrderCreateRQ returns OrderViewRS",
+    "x": 160,
+    "y": 271,
+    "wires": []
+  },
+  {
+    "id": "9c47f368.46fad",
+    "type": "change",
+    "z": "93c6c8f7.51c618",
+    "name": "set TransactionIdentifier & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "TransactionIdentifier",
+        "pt": "msg",
+        "to": "payload.OrderViewRS.$.TransactionIdentifier",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 240,
+    "y": 640,
+    "wires": [
+      [
+        "732ef536.7b44fc",
+        "4677aebe.aa528"
+      ]
+    ]
+  },
+  {
+    "id": "2f674fdb.db205",
+    "type": "change",
+    "z": "93c6c8f7.51c618",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 870,
+    "y": 640,
+    "wires": [
+      [
+        "8ddfe117.6a4ec",
+        "aa3fca8c.8d22c8"
+      ]
+    ]
+  },
+  {
+    "id": "8ddfe117.6a4ec",
+    "type": "http request",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "method": "GET",
+    "ret": "txt",
+    "url": "",
+    "tls": "",
+    "x": 1090,
+    "y": 640,
+    "wires": [
+      [
+        "91e95059.c3d77"
+      ]
+    ]
+  },
+  {
+    "id": "81fb7eb2.db848",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1450,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "aa3fca8c.8d22c8",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "url",
+    "x": 860,
+    "y": 700,
+    "wires": []
+  },
+  {
+    "id": "732ef536.7b44fc",
+    "type": "debug",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "TransactionIdentifier",
+    "x": 190,
+    "y": 700,
+    "wires": []
+  },
+  {
+    "id": "4677aebe.aa528",
+    "type": "function",
+    "z": "93c6c8f7.51c618",
+    "name": "set URL for get request",
+    "func": "msg.url =\"http://iata.api.mashery.com/Zeus/OSIN/\" + msg.TransactionIdentifier;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 570,
+    "y": 640,
+    "wires": [
+      [
+        "2f674fdb.db205"
+      ]
+    ]
+  },
+  {
+    "id": "91e95059.c3d77",
+    "type": "xml",
+    "z": "93c6c8f7.51c618",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1250,
+    "y": 640,
+    "wires": [
+      [
+        "81fb7eb2.db848"
+      ]
+    ]
+  },
+  {
+    "id": "c909fdb0.154fe",
+    "type": "comment",
+    "z": "93c6c8f7.51c618",
+    "name": "Simply get the Accounting message (OrderSalesInformationNotificationRQ)",
+    "info": "As this message cannot be sent to a party it is stored.\nSending the message to your own system could be simulated thanks to this flow...",
+    "x": 720,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "d6d9fc4d.a2203",
+    "type": "comment",
+    "z": "93c6c8f7.51c618",
+    "name": "NDC 17.1/OO Alpha - Get OSIN",
+    "info": "",
+    "x": 190,
+    "y": 60,
+    "wires": []
+  }
+]

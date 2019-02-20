@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IATA_ServiceDeliveryRS Version="IATA2017.1" xmlns="http://www.iata.org/IATA/EDIST/2017.1">
+	<Order OrderID="D127V5" Owner="C9">
+		<OrderItem OrderItemID="ORDERITEM3" Owner="C9">
+			<Service ServiceID="SV1_1_SV_1024_EFR_SH2_72_SH2">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1024">
+						<Name>3rd Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+			<Service ServiceID="SV1_1_SV_1023_EFR_SH2_70_SH2">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1023">
+						<Name>1st Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+			<Service ServiceID="SV1_1_SV_1010_EFR_SH2_46_SH2">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1010">
+						<Name>2nd Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+		</OrderItem>
+		<OrderItem OrderItemID="ORDERITEM4" Owner="C9">
+			<Service ServiceID="SV1_2_SV_1024_EFR_SH1_106_SH1">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1024">
+						<Name>3rd Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+			<Service ServiceID="SV1_2_SV_1010_EFR_SH1_80_SH1">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1010">
+						<Name>2nd Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+			<Service ServiceID="SV1_2_SV_1023_EFR_SH1_104_SH1">
+				<ServiceSelection>
+					<ServiceDefinition ServiceDefinitionID="SV_1023">
+						<Name>1st Bag</Name>
+						<Descriptions>
+							<Description/>
+						</Descriptions>
+					</ServiceDefinition>
+				</ServiceSelection>
+				<OfferValidDates>
+					<Start Timestamp="2017-07-25T16:35:01.595+03:00"/>
+					<End Timestamp="2017-07-26T03:00:00.000+03:00"/>
+				</OfferValidDates>
+				<PartnerID>sampleId</PartnerID>
+				<ServiceSettlementValue>
+					<Method>
+						<Code>000</Code>
+					</Method>
+				</ServiceSettlementValue>
+			</Service>
+		</OrderItem>
+	</Order>
+</IATA_ServiceDeliveryRS>

@@ -1,0 +1,561 @@
+{
+	"id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+	"name": "IATA SandBox NDC 17.1 OO 2.1 - 2017 08 17 postman v1",
+	"description": "IATA SandBox NDC 17.1 OO 2.1 - 2017 08 17 postman v1",
+	"order": [],
+	"folders": [
+		{
+			"id": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c",
+			"name": "NDC",
+			"description": "",
+			"order": [
+				"89bf7615-a0bf-398b-0656-3a024b08a8f5",
+				"6174f1a0-c11f-40eb-de9e-c4eda2c67fc4",
+				"85b9091e-dbd0-7383-dba7-c8fdcdf93d5c",
+				"24e2f29d-2c2d-ac2b-5809-774ec4621a79",
+				"bf4ad81f-ddc1-57cf-dffb-a6e1e7743c85",
+				"07ac4373-503b-49d6-611c-9256471cec2a",
+				"b6b9afac-b450-7bf5-1612-a1f7a87572e6",
+				"13db6cc0-0d96-f851-4405-da98cc6cff43"
+			],
+			"owner": 0,
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folders_order": []
+		},
+		{
+			"id": "bdd24510-43e4-d435-cb4a-865728191f07",
+			"name": "One Order",
+			"description": "",
+			"order": [
+				"245a27d6-a76c-a965-89e0-29d959b1ec5a",
+				"dbf26429-925f-953b-1c4a-4c1039c9ca2e",
+				"a36c2e2a-a9f3-ea02-a135-34d969b9b450",
+				"e65880cc-660f-a155-c180-4210dbeb2283",
+				"d3730141-390e-4b12-e177-89a717d1c2a9",
+				"889f39fd-0773-d511-132c-556e326184fc"
+			],
+			"owner": 0,
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folders_order": []
+		}
+	],
+	"folders_order": [
+		"a50b5004-2f3e-3a71-5d8f-e797c57b2f2c",
+		"bdd24510-43e4-d435-cb4a-865728191f07"
+	],
+	"timestamp": 0,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "07ac4373-503b-49d6-611c-9256471cec2a",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290517058,
+			"name": "OrderCreateRQ_1ADT_1Service_OneWay",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Passengers/>\r\n\t\t<Order>\r\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"201-56f9f64c388f4340a4aaff999b34ed30\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">780.01</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"Z9\" ResponseID=\"201-56f9f64c388f4340a4aaff999b34ed30\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">15.00</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OfferItemID46\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t<SegmentID>SEG_LHRDXB_1</SegmentID>\r\n\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t</Order>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<PaymentCard>\r\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\r\n\t\t\t\t\t\t<CardCode>CA</CardCode>\r\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\r\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\r\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\r\n\t\t\t\t\t\t<CardHolderBillingAddress>\r\n\t\t\t\t\t\t\t<Street>Waterside</Street>\r\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\r\n\t\t\t\t\t\t</CardHolderBillingAddress>\r\n\t\t\t\t\t\t<Surcharge>\r\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\r\n\t\t\t\t\t\t</Surcharge>\r\n\t\t\t\t\t\t<EffectiveExpireDate>\r\n\t\t\t\t\t\t\t<Effective>1212</Effective>\r\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\r\n\t\t\t\t\t\t</EffectiveExpireDate>\r\n\t\t\t\t\t</PaymentCard>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">789.01</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t\t<DataLists>\r\n\t\t\t<PassengerList>\r\n\t\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>John</GivenName>\r\n\t\t\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t</PassengerList>\r\n\t\t\t<ContactList>\r\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>john@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t</ContactList>\r\n\t\t</DataLists>\r\n\t</Query>\r\n</OrderCreateRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "13db6cc0-0d96-f851-4405-da98cc6cff43",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290510970,
+			"name": "OrderRetrieveRQ",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderRetrieveRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Filters>\r\n\t\t\t<OrderID Owner=\"Z9\">A12346SW8</OrderID>\r\n\t\t</Filters>\r\n\t</Query>\r\n</OrderRetrieveRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "245a27d6-a76c-a965-89e0-29d959b1ec5a",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/OSIN/376ecfa0f8cf4e1b9c8176e7b1578fad",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290515793,
+			"name": "OrderSalesInformationNotificationRQ",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchemainstance\" xsi:schemaLocation=\"http://www.iata.org/IATA/EDIST ../AirShoppingRQ.xsd\" EchoToken=\"8fdb1c621a7a4454aa3360556e7784d5\" TimeStamp=\"2015-12-10T12:39:00Z\" Version=\"15.2\" Target=\"Test\" PrimaryLangID=\"en\" AltLangID=\"en\" RetransmissionIndicator=\"false\" AsynchronousAllowedInd=\"false\" TransactionIdentifier=\"a\" SequenceNmbr=\"201\">\r\n\t<PointOfSale>\r\n\t\t<Location>\r\n\t\t\t<CountryCode>US</CountryCode>\r\n\t\t\t<CityCode>WAS</CityCode>\r\n\t\t</Location>\r\n\t\t<RequestTime Zone=\"EST\">2015-10-12T07:38:00</RequestTime>\r\n\t\t<TouchPoint>\r\n\t\t\t<Device>\r\n\t\t\t\t<Code>2</Code>\r\n\t\t\t\t<Definition>Web Browser</Definition>\r\n\t\t\t\t<Position>\r\n\t\t\t\t\t<Latitude>38.89756</Latitude>\r\n\t\t\t\t\t<Longitude>-77.03650</Longitude>\r\n\t\t\t\t\t<NAC>8KD7V PGGM0</NAC>\r\n\t\t\t\t</Position>\r\n\t\t\t</Device>\r\n\t\t\t<Event>\r\n\t\t\t\t<Code>9</Code>\r\n\t\t\t\t<Definition>Shop</Definition>\r\n\t\t\t</Event>\r\n\t\t</TouchPoint>\r\n\t</PointOfSale>\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Contacts>\r\n\t\t\t\t\t<Contact>\r\n\t\t\t\t\t\t<EmailContact>\r\n\t\t\t\t\t\t\t<Address>ndc@usdtravel.com</Address>\r\n\t\t\t\t\t\t</EmailContact>\r\n\t\t\t\t\t</Contact>\r\n\t\t\t\t</Contacts>\r\n\t\t\t\t<PseudoCity>A4A</PseudoCity>\r\n\t\t\t\t<IATA_Number>98417900</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"Z9\">Z9</AgencyID>\r\n\t\t\t\t<AgentUser>\r\n\t\t\t\t\t<Name>ksmith</Name>\r\n\t\t\t\t\t<AgentUserID>ksmith212</AgentUserID>\r\n\t\t\t\t\t<UserRole>Admin</UserRole>\r\n\t\t\t\t</AgentUser>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Parameters>\r\n\t\t<CurrCodes>\r\n\t\t\t<CurrCode>EUR</CurrCode>\r\n\t\t</CurrCodes>\r\n\t</Parameters>\r\n\t<Travelers>\r\n\t\t<Traveler>\r\n\t\t\t<AnonymousTraveler>\r\n\t\t\t\t<PTC Quantity=\"1\">ADT</PTC>\r\n\t\t\t</AnonymousTraveler>\r\n\t\t</Traveler>\r\n\t</Travelers>\r\n\t<CoreQuery>\r\n\t\t<OriginDestinations>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>FRA</AirportCode>\r\n\t\t\t\t\t<Date>2016-11-26</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>TXL</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t\t<MarketingCarrierAirline>\r\n\t\t\t\t\t<AirlineID>Z9</AirlineID>\r\n\t\t\t\t\t<Name>ZEUS Air</Name>\r\n\t\t\t\t</MarketingCarrierAirline>\r\n\t\t\t</OriginDestination>\r\n\t\t</OriginDestinations>\r\n\t</CoreQuery>\r\n\t<Preferences>\r\n\t\t<Preference>\r\n\t\t\t<AirlinePreferences>\r\n\t\t\t\t<Airline>\r\n\t\t\t\t\t<AirlineID>Z9</AirlineID>\r\n\t\t\t\t</Airline>\r\n\t\t\t</AirlinePreferences>\r\n\t\t</Preference>\r\n\t\t<Preference>\r\n\t\t\t<CabinPreferences>\r\n\t\t\t\t<CabinType>\r\n\t\t\t\t\t<Code>M</Code>\r\n\t\t\t\t\t<Definition>Economy/coach discounted</Definition>\r\n\t\t\t\t</CabinType>\r\n\t\t\t</CabinPreferences>\r\n\t\t</Preference>\r\n\t</Preferences>\r\n\t<Metadata>\r\n\t\t<Other>\r\n\t\t\t<OtherMetadata>\r\n\t\t\t\t<CurrencyMetadatas>\r\n\t\t\t\t\t<CurrencyMetadata MetadataKey=\"EUR\">\r\n\t\t\t\t\t\t<Decimals>2</Decimals>\r\n\t\t\t\t\t</CurrencyMetadata>\r\n\t\t\t\t</CurrencyMetadatas>\r\n\t\t\t</OtherMetadata>\r\n\t\t</Other>\r\n\t</Metadata>\r\n</AirShoppingRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "bdd24510-43e4-d435-cb4a-865728191f07"
+		},
+		{
+			"id": "24e2f29d-2c2d-ac2b-5809-774ec4621a79",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290399265,
+			"name": "OrderCreateRQ_2ADT_1Service_OneWay",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Passengers/>\r\n\t\t<Order>\r\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"201-db1fb38b4a7443368395e0e0bb2f2024\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">1560.02</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t\t<PassengerRefs>SH2</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_2\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"Z9\" ResponseID=\"201-db1fb38b4a7443368395e0e0bb2f2024\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">20.0</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OfferItemID1\">\r\n\t\t\t\t\t<PassengerRefs>SH1 SH2</PassengerRefs>\r\n\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t<SegmentID>SEG_LHRDXB_1</SegmentID>\r\n\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t</Order>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<PaymentCard>\r\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\r\n\t\t\t\t\t\t<CardCode>CA</CardCode>\r\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\r\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\r\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\r\n\t\t\t\t\t\t<CardHolderBillingAddress>\r\n\t\t\t\t\t\t\t<Street>Waterside</Street>\r\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\r\n\t\t\t\t\t\t</CardHolderBillingAddress>\r\n\t\t\t\t\t\t<Surcharge>\r\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\r\n\t\t\t\t\t\t</Surcharge>\r\n\t\t\t\t\t\t<EffectiveExpireDate>\r\n\t\t\t\t\t\t\t<Effective>1212</Effective>\r\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\r\n\t\t\t\t\t\t</EffectiveExpireDate>\r\n\t\t\t\t\t</PaymentCard>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">1580.02</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t\t<DataLists>\r\n\t\t\t<PassengerList>\r\n\t\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>John</GivenName>\r\n\t\t\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t\t<Passenger PassengerID=\"SH2\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\t\t\t\t\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>Mary</GivenName>\r\n\t\t\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH2_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t</PassengerList>\r\n\t\t\t<ContactList>\r\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>john@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t\t<ContactInformation ContactID=\"SH2_CONT\">\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>mary@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t</ContactList>\r\n\t\t</DataLists>\r\n\t</Query>\r\n</OrderCreateRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "6174f1a0-c11f-40eb-de9e-c4eda2c67fc4",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502289959990,
+			"name": "OrderCreateRQ_2ADT_1Service_RoundTrip",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Passengers/>\r\n\t\t<Order>\r\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"201-463befd932fa4d02a5b5d25e985730ab\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">2052.34</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t\t<PassengerRefs>SH2</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_2\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"OFFER42\" Owner=\"Z9\" ResponseID=\"201-463befd932fa4d02a5b5d25e985730ab\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">2097.46</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM15_1\">\r\n\t\t\t\t\t<PassengerRefs>SH2</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM15_2\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"Z9\" ResponseID=\"201-463befd932fa4d02a5b5d25e985730ab\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">12.0</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OfferItemID2\">\r\n\t\t\t\t\t<PassengerRefs>SH1 SH2</PassengerRefs>\r\n\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t<SegmentID>SEG_LHRBCN_2</SegmentID>\r\n\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t\t<OfferItem OfferItemID=\"OfferItemID2\">\r\n\t\t\t\t\t<PassengerRefs>SH1 SH2</PassengerRefs>\r\n\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t<SegmentID>SEG_BCNDXB_1</SegmentID>\r\n\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t</Order>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<PaymentCard>\r\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\r\n\t\t\t\t\t\t<CardCode>CA</CardCode>\r\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\r\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\r\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\r\n\t\t\t\t\t\t<CardHolderBillingAddress>\r\n\t\t\t\t\t\t\t<Street>Waterside</Street>\r\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\r\n\t\t\t\t\t\t</CardHolderBillingAddress>\r\n\t\t\t\t\t\t<Surcharge>\r\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\r\n\t\t\t\t\t\t</Surcharge>\r\n\t\t\t\t\t\t<EffectiveExpireDate>\r\n\t\t\t\t\t\t\t<Effective>1212</Effective>\r\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\r\n\t\t\t\t\t\t</EffectiveExpireDate>\r\n\t\t\t\t\t</PaymentCard>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">4197.8</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t\t<DataLists>\r\n\t\t\t<PassengerList>\r\n\t\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>John</GivenName>\r\n\t\t\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t\t<Passenger PassengerID=\"SH2\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\t\t\t\t\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>Mary</GivenName>\r\n\t\t\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH2_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t</PassengerList>\r\n\t\t\t<ContactList>\r\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>john@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t\t<ContactInformation ContactID=\"SH2_CONT\">\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>mary@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t</ContactList>\r\n\t\t</DataLists>\r\n\t</Query>\r\n</OrderCreateRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "85b9091e-dbd0-7383-dba7-c8fdcdf93d5c",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290000214,
+			"name": "AirShoppingRQ_2ADT_OneWay",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<CoreQuery>\r\n\t\t<OriginDestinations>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t<Date>2017-08-27</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>DXB</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t</OriginDestinations>\r\n\t</CoreQuery>\r\n\t<Preference>\r\n\t\t<CabinPreferences>\r\n\t\t\t<CabinType>\r\n\t\t\t\t<Code>M</Code>\r\n\t\t\t</CabinType>\r\n\t\t</CabinPreferences>\r\n\t</Preference>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t\t<Passenger PassengerID=\"SH2\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</AirShoppingRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "889f39fd-0773-d511-132c-556e326184fc",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290174664,
+			"name": "ServiceStatusChangeNotification",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<IATA_ServiceStatusChangeNotificationRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\r\n\t<Order OrderID=\"A12346SG8\" Owner=\"Z9\">\r\n\t\t<OrderItem OrderItemID=\"ORDERITEM1\" Owner=\"Z9\">\r\n\t\t\t<Service ServiceID=\"SV1_1_SV_1010_EFO_SH2_5_SH2\" Owner=\"Z9\">\r\n\t\t\t\t<ServiceStatus>Service Delivery DELIVERED</ServiceStatus>\r\n\t\t\t</Service>\r\n\t\t</OrderItem>\r\n\t</Order>\r\n</IATA_ServiceStatusChangeNotificationRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "bdd24510-43e4-d435-cb4a-865728191f07"
+		},
+		{
+			"id": "89bf7615-a0bf-398b-0656-3a024b08a8f5",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502289985710,
+			"name": "AirShoppingRQ_2ADT_RoundTrip",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<CoreQuery>\r\n\t\t<OriginDestinations>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t<Date>2017-08-26</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>DXB</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>DXB</AirportCode>\r\n\t\t\t\t\t<Date>2017-08-28</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t</OriginDestinations>\r\n\t</CoreQuery>\r\n\t<Preference>\r\n\t\t<CabinPreferences>\r\n\t\t\t<CabinType>\r\n\t\t\t\t<Code>M</Code>\r\n\t\t\t</CabinType>\r\n\t\t</CabinPreferences>\r\n\t</Preference>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t\t<Passenger PassengerID=\"SH2\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</AirShoppingRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "a36c2e2a-a9f3-ea02-a135-34d969b9b450",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502954353743,
+			"name": "ServiceDeliveryRQ_PAX_Services_For_Specific_Segment",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<IATA_ServiceDeliveryRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\n\t<!-- Info about the services of a passenger for a specific segment request -->\n\t\t<Passengers>\n\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t<PTC>ADT</PTC>\n\t\t\t<Individual>\n\t\t\t\t<GivenName>Mary</GivenName>\n\t\t\t\t<Surname>Jones</Surname>\n\t\t\t</Individual>\n\t\t\t<ContactInformation>\n\t\t\t\t<ContactProvided>\n\t\t\t\t\t<EmailAddress>\n\t\t\t\t\t\t<EmailAddressValue>Mary@test.com</EmailAddressValue>\n\t\t\t\t\t</EmailAddress>\n\t\t\t\t</ContactProvided>\n\t\t\t</ContactInformation>\n\t\t</Passenger>\n\t</Passengers>\n\t<Segment>\n\t\t<Departure>\n\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t<Date>2017-08-27</Date>\n\t\t</Departure>\n\t\t<MarketingCarrier>\n\t\t\t<AirlineID>Z9</AirlineID>\n\t\t\t<Name>Zeus Airlines</Name>\n\t\t\t<FlightNumber>150</FlightNumber>\n\t\t</MarketingCarrier>\n\t</Segment>\n</IATA_ServiceDeliveryRQ>\n"
+		},
+		{
+			"id": "b6b9afac-b450-7bf5-1612-a1f7a87572e6",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290114982,
+			"name": "OrderListRQ",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderListRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Filters>\r\n\t\t\t<CreateDateRange>\r\n\t\t\t\t<Effective>2017-06-01</Effective>\r\n\t\t\t\t<Expiration>2017-09-15</Expiration>\r\n\t\t\t</CreateDateRange>\r\n\t\t</Filters>\r\n\t</Query>\r\n</OrderListRQ>\r\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "bf4ad81f-ddc1-57cf-dffb-a6e1e7743c85",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502290106942,
+			"name": "AirShoppingRQ_1ADT_OneWay",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00010080</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<CoreQuery>\n\t\t<OriginDestinations>\n\t\t\t<OriginDestination>\n\t\t\t\t<Departure>\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t\t\t<Date>2017-08-27</Date>\n\t\t\t\t</Departure>\n\t\t\t\t<Arrival>\n\t\t\t\t\t<AirportCode>DXB</AirportCode>\n\t\t\t\t</Arrival>\n\t\t\t</OriginDestination>\n\t\t</OriginDestinations>\n\t</CoreQuery>\n\t<Preference>\n\t\t<CabinPreferences>\n\t\t\t<CabinType>\n\t\t\t\t<Code>M</Code>\n\t\t\t</CabinType>\n\t\t</CabinPreferences>\n\t</Preference>\n\t<DataLists>\n\t\t<PassengerList>\n\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t</PassengerList>\n\t</DataLists>\n</AirShoppingRQ>\n",
+			"collection_id": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"folder": "a50b5004-2f3e-3a71-5d8f-e797c57b2f2c"
+		},
+		{
+			"id": "d3730141-390e-4b12-e177-89a717d1c2a9",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502954529087,
+			"name": "ServiceDeliveryRQ_PAX_Services_For_Specific_Order",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<IATA_ServiceDeliveryRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\r\n\t<!-- Info about the services of a passenger for a specific order request -->\r\n\t<Passengers>\r\n\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t<PTC>ADT</PTC>\r\n\t\t\t<Individual>\r\n\t\t\t\t<GivenName>Mary</GivenName>\r\n\t\t\t\t<Surname>Jones</Surname>\r\n\t\t\t</Individual>\r\n\t\t\t<ContactInformation>\r\n\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>Mary@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactProvided>\r\n\t\t\t</ContactInformation>\r\n\t\t</Passenger>\r\n\t</Passengers>\r\n\t<Order OrderID=\"A12346SG8\"/>\r\n</IATA_ServiceDeliveryRQ>\r\n"
+		},
+		{
+			"id": "dbf26429-925f-953b-1c4a-4c1039c9ca2e",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502954294361,
+			"name": "ServiceDeliveryRQ_Service_Type_For_Specific_Segment",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<IATA_ServiceDeliveryRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\n\t<!-- Info about a service type for a specific segment request -->\n\t<Service>\n\t\t<ServiceType>\n\t\t\t<Code>MEL</Code>\n\t\t</ServiceType>\n\t</Service>\n\t<Segment>\n\t\t<Departure>\n\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t<Date>2017-08-27</Date>\n\t\t</Departure>\n\t\t<MarketingCarrier>\n\t\t\t<AirlineID>Z9</AirlineID>\n\t\t\t<Name>Zeus Airlines</Name>\n\t\t\t<FlightNumber>150</FlightNumber>\n\t\t</MarketingCarrier>\n\t</Segment>\n</IATA_ServiceDeliveryRQ>\n"
+		},
+		{
+			"id": "e65880cc-660f-a155-c180-4210dbeb2283",
+			"headers": "Content-Type: application/xml\nAuthorization-key: {{Authorization-key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/xml",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization-key",
+					"value": "{{Authorization-key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{zeus}}/NDC",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1502954309175,
+			"name": "ServiceDeliveryRQ_Service_Type_For_Specific_Order",
+			"description": "",
+			"collectionId": "2a62a9e3-713c-1342-76b3-219c43e6f1da",
+			"responses": [],
+			"rawModeData": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<IATA_ServiceDeliveryRQ Version=\"IATA2017.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" PrimaryLangID=\"EN\" AltLangID=\"EN\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\">\r\n\t<!-- Info about a service type for a specific order request -->\r\n\t<Service>\r\n\t\t<ServiceType>\r\n\t\t\t<Code>BAG</Code>\r\n\t\t</ServiceType>\r\n\t</Service>\r\n\t<Order OrderID=\"A12346SG8\"/>\r\n</IATA_ServiceDeliveryRQ>\r\n"
+		}
+	]
+}

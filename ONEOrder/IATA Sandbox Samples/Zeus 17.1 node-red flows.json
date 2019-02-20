@@ -1,0 +1,866 @@
+[
+  {
+    "id": "6fd08b49.4a9864",
+    "type": "inject",
+    "z": "e99afa68.731848",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 140,
+    "y": 209,
+    "wires": [
+      [
+        "14ad444d.dae2cc"
+      ]
+    ]
+  },
+  {
+    "id": "9c503533.21a6b8",
+    "type": "http request",
+    "z": "e99afa68.731848",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 750,
+    "y": 209,
+    "wires": [
+      [
+        "c407686d.9f64b8",
+        "5caed358.4645dc"
+      ]
+    ]
+  },
+  {
+    "id": "a4748b0.3f31478",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1210,
+    "y": 209,
+    "wires": []
+  },
+  {
+    "id": "14ad444d.dae2cc",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 310,
+    "y": 209,
+    "wires": [
+      [
+        "1e06fc43.bf1014"
+      ]
+    ]
+  },
+  {
+    "id": "c407686d.9f64b8",
+    "type": "xml",
+    "z": "e99afa68.731848",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 950,
+    "y": 209,
+    "wires": [
+      [
+        "a4748b0.3f31478",
+        "f9ad0779.679bd8"
+      ]
+    ]
+  },
+  {
+    "id": "5caed358.4645dc",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 770,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "1e06fc43.bf1014",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "AirShopRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AirShoppingRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<CoreQuery>\n\t\t<OriginDestinations>\n\t\t\t<OriginDestination>\n\t\t\t\t<Departure>\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\n\t\t\t\t\t<Date>2017-08-27</Date>\n\t\t\t\t</Departure>\n\t\t\t\t<Arrival>\n\t\t\t\t\t<AirportCode>BCN</AirportCode>\n\t\t\t\t</Arrival>\n\t\t\t</OriginDestination>\n\t\t</OriginDestinations>\n\t</CoreQuery>\n\t<Preference>\n\t\t<CabinPreferences>\n\t\t\t<CabinType>\n\t\t\t\t<Code>M</Code>\n\t\t\t</CabinType>\n\t\t</CabinPreferences>\n\t</Preference>\n\t<DataLists>\n\t\t<PassengerList>\n\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t\t<Passenger PassengerID=\"SH2\">\n\t\t\t\t<PTC>ADT</PTC>\n\t\t\t</Passenger>\n\t\t</PassengerList>\n\t</DataLists>\n</AirShoppingRQ>\n",
+    "output": "str",
+    "x": 517,
+    "y": 209,
+    "wires": [
+      [
+        "9c503533.21a6b8"
+      ]
+    ]
+  },
+  {
+    "id": "f9ad0779.679bd8",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set responseID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "shoppingResponseID",
+        "pt": "msg",
+        "to": "payload.AirShoppingRS.ShoppingResponseID[0].ResponseID[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 370,
+    "y": 280,
+    "wires": [
+      [
+        "65f54a6c.ab5674"
+      ]
+    ]
+  },
+  {
+    "id": "e0a31ffc.7cc7",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "adminOrderCreateRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderCreateRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<Query>\n\t\t<Passengers/>\n\t\t<Order>\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"Z9\" ResponseID=\"{{shoppingResponseID}}\">\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">1560.02</TotalOfferPrice>\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_2\">\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\n\t\t\t\t</OfferItem>\n\t\t\t</Offer>\n\t\t</Order>\n\t\t<Payments>\n\t\t\t<Payment>\n\t\t\t\t<Method>\n\t\t\t\t\t<PaymentCard>\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\n\t\t\t\t\t\t<CardCode>CA</CardCode>\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\n\t\t\t\t\t\t<CardHolderBillingAddress>\n\t\t\t\t\t\t\t<Street>Waterside</Street>\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\n\t\t\t\t\t\t</CardHolderBillingAddress>\n\t\t\t\t\t\t<Surcharge>\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\n\t\t\t\t\t\t</Surcharge>\n\t\t\t\t\t\t<EffectiveExpireDate>\n\t\t\t\t\t\t\t<Effective>1212</Effective>\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\n\t\t\t\t\t\t</EffectiveExpireDate>\n\t\t\t\t\t</PaymentCard>\n\t\t\t\t</Method>\n\t\t\t\t<Amount Code=\"EUR\">1580.02</Amount>\n\t\t\t</Payment>\n\t\t</Payments>\n\t\t<DataLists>\n\t\t\t<PassengerList>\n\t\t\t\t<Passenger PassengerID=\"SH1\">\n\t\t\t\t\t<PTC>ADT</PTC>\n\t\t\t\t\t<Individual>\n\t\t\t\t\t\t<GivenName>Thibaut</GivenName>\n\t\t\t\t\t\t<Surname>RUY</Surname>\n\t\t\t\t\t</Individual>\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\n\t\t\t\t</Passenger>\n\t\t\t</PassengerList>\n\t\t\t<ContactList>\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\n\t\t\t\t\t<EmailAddress>\n\t\t\t\t\t\t<EmailAddressValue>thibautruy@test.com</EmailAddressValue>\n\t\t\t\t\t</EmailAddress>\n\t\t\t\t</ContactInformation>\n\t\t\t</ContactList>\n\t\t</DataLists>\n\t</Query>\n</OrderCreateRQ>\n",
+    "output": "str",
+    "x": 840,
+    "y": 280,
+    "wires": [
+      [
+        "84035a7a.8f0718",
+        "14b3bdf4.882062"
+      ]
+    ]
+  },
+  {
+    "id": "f0de0342.625be",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "OrderViewRS",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 1420,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "84035a7a.8f0718",
+    "type": "http request",
+    "z": "e99afa68.731848",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 1070,
+    "y": 280,
+    "wires": [
+      [
+        "7363ec17.166214"
+      ]
+    ]
+  },
+  {
+    "id": "65f54a6c.ab5674",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 630,
+    "y": 280,
+    "wires": [
+      [
+        "e0a31ffc.7cc7"
+      ]
+    ]
+  },
+  {
+    "id": "14b3bdf4.882062",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 790,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "37db9998.152086",
+    "type": "inject",
+    "z": "e99afa68.731848",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 140,
+    "y": 540,
+    "wires": [
+      [
+        "6b7457df.dae428"
+      ]
+    ]
+  },
+  {
+    "id": "b50408a7.813f68",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "OrderListRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderListRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>Tibo Tibo Agency</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00000001</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<Query>\n\t\t<Filters>\n\t\t\t<CreateDateRange>\n\t\t\t\t<Effective>2018-05-01</Effective>\n\t\t\t\t<Expiration>2018-12-31</Expiration>\n\t\t\t</CreateDateRange>\n\t\t</Filters>\n\t</Query>\n</OrderListRQ>\n",
+    "output": "str",
+    "x": 550,
+    "y": 600,
+    "wires": [
+      [
+        "d8390e71.2a6ee"
+      ]
+    ]
+  },
+  {
+    "id": "6b7457df.dae428",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 370,
+    "y": 600,
+    "wires": [
+      [
+        "b50408a7.813f68"
+      ]
+    ]
+  },
+  {
+    "id": "d8390e71.2a6ee",
+    "type": "http request",
+    "z": "e99afa68.731848",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 730,
+    "y": 600,
+    "wires": [
+      [
+        "f393dbb8.7ed258"
+      ]
+    ]
+  },
+  {
+    "id": "f393dbb8.7ed258",
+    "type": "xml",
+    "z": "e99afa68.731848",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 910,
+    "y": 600,
+    "wires": [
+      [
+        "2d65a6dc.6f89aa"
+      ]
+    ]
+  },
+  {
+    "id": "b015931e.4ef7a",
+    "type": "split",
+    "z": "e99afa68.731848",
+    "name": "",
+    "splt": "\n",
+    "spltType": "str",
+    "arraySplt": 1,
+    "arraySpltType": "len",
+    "stream": false,
+    "addname": "",
+    "x": 130,
+    "y": 760,
+    "wires": [
+      [
+        "1ab0c17d.d1950f"
+      ]
+    ]
+  },
+  {
+    "id": "2d65a6dc.6f89aa",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "Set Orders",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.OrderListRS.Response[0].Orders[0].Order",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1070,
+    "y": 600,
+    "wires": [
+      [
+        "b015931e.4ef7a",
+        "5031aba0.de3094"
+      ]
+    ]
+  },
+  {
+    "id": "6afc53df.f72aec",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "html",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<head>\n    <style>\n        {{{flow.style}}}\n    </style>\n<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>\n\n<script>\nfunction myFunction(col) {\n  // Declare variables \n  var input, filter, table, tr, td, i;\n  input = document.getElementById(\"myInput\"+col);\n  filter = input.value.toUpperCase();\n  table = document.getElementById(\"myTable\");\n  tr = table.getElementsByTagName(\"tr\");\n\n  // Loop through all table rows, and hide those who don't match the search query\n  for (i = 0; i < tr.length; i++) {\n    td = tr[i].getElementsByTagName(\"td\")[col];\n    if (td) {\n      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {\n        tr[i].style.display = \"\";\n      } else {\n        tr[i].style.display = \"none\";\n      }\n    } \n  }\n}\n</script>\n</head>\n\n<body>\n<table width=\"100%\" id=\"myTable\">        \n    <tr>\n        <th>Order creation date<br><input type=\"text\" id=\"myInput0\" onkeyup=\"myFunction(0)\" placeholder=\"Search..\"></br></th>\n        <th>Agency<br><input type=\"text\" id=\"myInput1\" onkeyup=\"myFunction(1)\" placeholder=\"Search..\"></br></th>\n        <th>Order ID<br><input type=\"text\" id=\"myInput2\" onkeyup=\"myFunction(2)\" placeholder=\"Search..\"></br></th>\n        <th>Pax<br><input type=\"text\" id=\"myInput3\" onkeyup=\"myFunction(3)\" placeholder=\"Search..\"></br></th>\n        <th>Details<br></br></th>\n    </tr>\n        {{{flow.html}}}\n</table>\n</body>",
+    "x": 1070,
+    "y": 960,
+    "wires": [
+      [
+        "4ecde139.b651f"
+      ]
+    ]
+  },
+  {
+    "id": "6c20db4c.e2ba04",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "css",
+    "field": "style",
+    "fieldType": "flow",
+    "format": "html",
+    "syntax": "mustache",
+    "template": "table {\n    color: #333;\n    font-family: Helvetica, Arial, sans-serif;\n    width: 100%;\n    border-collapse: collapse;\n    border-spacing: 0;\n}\n\ntr {\n    border-bottom: 1px solid grey;\n    border-top:  1px solid grey;\n}\n\ntd, th {\n    /*border: 1px solid transparent;*/\n    /* No more visible border */\n    height: 20px;\n    transition: all 0.3s;\n    /* Simple transition for hover effect */\n}\n\nth {\n    background: #FFFFFF;\n    /* Darken header a bit */\n    /*border: 1px solid transparent;*/\n    border-bottom: 1px solid grey;\n    font-weight: bold;\n}\ntd {\n    background: #FAF0F0;\n    text-align: center;\n}\n\n/* Cells in even rows (2,4,6...) are one color */\n\ntr:nth-child(even) td {\n    background: #EEEEEE;\n}\n\n/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */\n\ntr:nth-child(odd) td {\n    background: #FFFFFF;\n}\ntr td:hover {\n    background: #666;\n    color: #FFF;\n}\n/* Hover cell effect! */\n\ndiv.border_bottom {\n    border: 3px solid gray;\n    margin: 0; \n}\n\n.name\n{\n    font-weight: bold;\n}\n\n.highlight\n{\n color: red;\n font-weight: bold;\n}",
+    "x": 910,
+    "y": 960,
+    "wires": [
+      [
+        "6afc53df.f72aec"
+      ]
+    ]
+  },
+  {
+    "id": "1d87052c.63140b",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "html",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "\t {{#payload}}\t\n\t\t<tr>\n\t\t    <td {{{classindex}}}>{{{OrderViewRS.$.TimeStamp}}}</td>\n\t\t    <td {{{classindex}}}>{{{\"agency\"}}}</td>\n\t\t    <td {{{classindex}}}>{{{OrderViewRS.Response.0.Order.0.$.OrderID}}}</td>\n\t\t    <td {{{classindex}}}>{{#Passengers}}{{{PassengerReference}}} {{/Passengers}}</td>\n\t\t    <td {{{classindex}}}>Departure: {{{Departure.0.Date.0}}} {{{Departure.0.AirportCode.0}}} \n\t\t    <BR>Arrival: {{{Arrival.0.Date.0}}} {{{Arrival.0.AirportCode.0}}}\n\t\t    <BR>{{{payload.OrderViewRS.Response.0.DataLists.0.PassengerList.0.Passenger.0.Individual.0.GivenName.0}}}\n\t\t    {{{payload.OrderViewRS.Response.0.DataLists.0.PassengerList.0.Passenger.0.Individual.0.Surname.0}}}\n\t\t    </td>\n\t\t</tr>\n{{/payload}}",
+    "output": "str",
+    "x": 130,
+    "y": 960,
+    "wires": [
+      [
+        "5ac2fd15.bb10d4"
+      ]
+    ]
+  },
+  {
+    "id": "5ac2fd15.bb10d4",
+    "type": "join",
+    "z": "e99afa68.731848",
+    "name": "",
+    "mode": "custom",
+    "build": "string",
+    "property": "payload",
+    "propertyType": "msg",
+    "key": "topic",
+    "joiner": "\n",
+    "joinerType": "str",
+    "accumulate": false,
+    "timeout": "20",
+    "count": "",
+    "reduceRight": false,
+    "reduceExp": "",
+    "reduceInit": "",
+    "reduceInitType": "",
+    "reduceFixup": "",
+    "x": 290,
+    "y": 960,
+    "wires": [
+      [
+        "75bd6b75.bcb374"
+      ]
+    ]
+  },
+  {
+    "id": "75bd6b75.bcb374",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "set payload",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "{{{payload}}}",
+    "output": "str",
+    "x": 530,
+    "y": 960,
+    "wires": [
+      [
+        "e8cf920d.d7bb1"
+      ]
+    ]
+  },
+  {
+    "id": "5031aba0.de3094",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 1400,
+    "y": 600,
+    "wires": []
+  },
+  {
+    "id": "c15dd3e7.bc017",
+    "type": "http in",
+    "z": "e99afa68.731848",
+    "name": "",
+    "url": "/OrderList",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 140,
+    "y": 600,
+    "wires": [
+      [
+        "6b7457df.dae428"
+      ]
+    ]
+  },
+  {
+    "id": "4ecde139.b651f",
+    "type": "http response",
+    "z": "e99afa68.731848",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1250,
+    "y": 960,
+    "wires": []
+  },
+  {
+    "id": "e8cf920d.d7bb1",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "set flow html",
+    "field": "html",
+    "fieldType": "flow",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "{{{payload}}}",
+    "output": "str",
+    "x": 730,
+    "y": 960,
+    "wires": [
+      [
+        "6c20db4c.e2ba04"
+      ]
+    ]
+  },
+  {
+    "id": "532f5e3b.790c4",
+    "type": "template",
+    "z": "e99afa68.731848",
+    "name": "OrderRetrieveRQ",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderRetrieveRQ xmlns=\"http://www.iata.org/IATA/EDIST/2017.1\" Version=\"IATA2017.1\">\n\t<Document>\n\t\t<Name>ZEUS NDC GATEWAY</Name>\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\n\t</Document>\n\t<Party>\n\t\t<Sender>\n\t\t\t<TravelAgencySender>\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\n\t\t\t\t<AgencyID>00010080</AgencyID>\n\t\t\t</TravelAgencySender>\n\t\t</Sender>\n\t</Party>\n\t<Query>\n\t\t<Filters>\n\t\t\t<OrderID Owner=\"Z9\">{{OrderID}}</OrderID>\n\t\t</Filters>\n\t</Query>\n</OrderRetrieveRQ>",
+    "output": "str",
+    "x": 910,
+    "y": 760,
+    "wires": [
+      [
+        "5f28216e.25339",
+        "548122b9.d6e87c"
+      ]
+    ]
+  },
+  {
+    "id": "a942c1c0.d28f3",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "headers.Authorization-key",
+        "pt": "msg",
+        "to": "YOURKEYHERE",
+        "tot": "str"
+      },
+      {
+        "t": "set",
+        "p": "headers.Content-Type",
+        "pt": "msg",
+        "to": "application/xml",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 670,
+    "y": 760,
+    "wires": [
+      [
+        "532f5e3b.790c4"
+      ]
+    ]
+  },
+  {
+    "id": "ef6f592a.fa3958",
+    "type": "http request",
+    "z": "e99afa68.731848",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://iata.api.mashery.com/Zeus/NDC",
+    "tls": "",
+    "x": 1310,
+    "y": 760,
+    "wires": [
+      [
+        "3bdcabdc.0a96f4"
+      ]
+    ]
+  },
+  {
+    "id": "3bdcabdc.0a96f4",
+    "type": "xml",
+    "z": "e99afa68.731848",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1490,
+    "y": 760,
+    "wires": [
+      [
+        "1d87052c.63140b"
+      ]
+    ]
+  },
+  {
+    "id": "d84b5727.89a798",
+    "type": "inject",
+    "z": "e99afa68.731848",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 120,
+    "y": 820,
+    "wires": [
+      [
+        "9446ab71.c8d278"
+      ]
+    ]
+  },
+  {
+    "id": "9446ab71.c8d278",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "OrderID",
+        "pt": "msg",
+        "to": "A12348ET8",
+        "tot": "str"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 360,
+    "y": 820,
+    "wires": [
+      [
+        "a942c1c0.d28f3"
+      ]
+    ]
+  },
+  {
+    "id": "5f28216e.25339",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "OrderRetrieveRQ",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 890,
+    "y": 680,
+    "wires": []
+  },
+  {
+    "id": "7363ec17.166214",
+    "type": "xml",
+    "z": "e99afa68.731848",
+    "name": "",
+    "property": "payload",
+    "attr": "",
+    "chr": "",
+    "x": 1250,
+    "y": 280,
+    "wires": [
+      [
+        "f0de0342.625be"
+      ]
+    ]
+  },
+  {
+    "id": "1ab0c17d.d1950f",
+    "type": "change",
+    "z": "e99afa68.731848",
+    "name": "set msg.OrderID & clear headers",
+    "rules": [
+      {
+        "t": "set",
+        "p": "OrderID",
+        "pt": "msg",
+        "to": "payload.OrderID[0]._",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "headers",
+        "pt": "msg",
+        "to": "{}",
+        "tot": "json"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 380,
+    "y": 760,
+    "wires": [
+      [
+        "a942c1c0.d28f3"
+      ]
+    ]
+  },
+  {
+    "id": "130c571d.3482d9",
+    "type": "catch",
+    "z": "e99afa68.731848",
+    "name": "",
+    "scope": null,
+    "x": 100,
+    "y": 60,
+    "wires": [
+      [
+        "5214a9cc.757bf8"
+      ]
+    ]
+  },
+  {
+    "id": "5214a9cc.757bf8",
+    "type": "debug",
+    "z": "e99afa68.731848",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 270,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "548122b9.d6e87c",
+    "type": "delay",
+    "z": "e99afa68.731848",
+    "name": "limit (quota)",
+    "pauseType": "rate",
+    "timeout": "5",
+    "timeoutUnits": "seconds",
+    "rate": "3",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 1130,
+    "y": 760,
+    "wires": [
+      [
+        "ef6f592a.fa3958"
+      ]
+    ]
+  },
+  {
+    "id": "5c7db897.33d198",
+    "type": "comment",
+    "z": "e99afa68.731848",
+    "name": "NDC Shop/Order",
+    "info": "Shop Order - 17.1 - Examples (see info tab for more details)\n\nThis flow is composed of two parts:\n\nPart 1 - AirShoppingRQ returns AirShoppingRS \nPart 2 - OrderCreateRQ returns OrderViewRS",
+    "x": 140,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "84b43dec.9fc77",
+    "type": "comment",
+    "z": "e99afa68.731848",
+    "name": "NDC OrderList/OrderRetrieve",
+    "info": "Shop Order - 17.1 - Examples (see info tab for more details)\n\nThis flow is composed of two parts:\n\nPart 1 - OrderListRQ returns OrderListRS \nPart 2 - OrderRetrieveRQ (Loop with delay to avoid reach quota) returns OrderViewRS",
+    "x": 180,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "323e6d3b.0721b2",
+    "type": "comment",
+    "z": "e99afa68.731848",
+    "name": "Webservice to display a list of Orders in html",
+    "info": "",
+    "x": 230,
+    "y": 660,
+    "wires": []
+  }
+]

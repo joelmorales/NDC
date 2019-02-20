@@ -1,0 +1,7 @@
+org/iata/oo/OoClient.class
+org/iata/oo/UnmarshallingResponseHandler.class
+org/iata/oo/builder/ServiceDeliveryRQBuilder.class
+org/iata/oo/builder/Buildable.class
+org/iata/oo/ClientException.class
+org/iata/oo/builder/Initializer.class
+org/iata/oo/builder/ServiceStatusChangeNotifRQBuilder.class
