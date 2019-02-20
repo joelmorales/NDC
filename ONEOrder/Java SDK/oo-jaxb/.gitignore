@@ -8,3 +8,9 @@ bin/**
 .project
 /bin
 /bin
+target/**
+/target/**
+.class
+**/*.class
+**/classes/**
+*.class
