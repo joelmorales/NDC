@@ -8,5 +8,8 @@ bin/**
 .project
 /bin
 /bin
+<<<<<<< HEAD
 target/**
 /target/**
+=======
+>>>>>>> b542d8b624bcabd23c0975eeca31ce0de760e67a
