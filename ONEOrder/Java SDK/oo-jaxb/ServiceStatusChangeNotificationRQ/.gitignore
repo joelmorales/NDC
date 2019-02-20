@@ -12,4 +12,6 @@ target/**
 /target/**
 .class
 **/*.class
+**/classes/**
+
 
