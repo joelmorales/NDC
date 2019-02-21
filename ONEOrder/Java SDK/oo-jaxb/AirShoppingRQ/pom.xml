@@ -30,7 +30,7 @@
 							<schemaIncludes>
 								<include>AirShoppingRQ/AirShoppingRQ.xsd</include>
 							</schemaIncludes>
-							<generatePackage>org.iata.oo.schema.ServiceDeliveryRQ</generatePackage>
+							<generatePackage>org.iata.oo.schema.AirShoppingRQ</generatePackage>
 							<generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
 							<extension>true</extension>
 							<args>
