@@ -7,10 +7,9 @@
 		<artifactId>oo-jaxb</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>AirShoppingyRQ</artifactId>
+	<artifactId>AirShoppingRQ</artifactId>
 	<packaging>jar</packaging>
-	<name>AirShoppingyRQ</name>
-	
+	<name>AirShoppingRQ</name>
 	<build>
 		<plugins>
 			<plugin>

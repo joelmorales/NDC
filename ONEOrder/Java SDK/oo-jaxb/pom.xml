@@ -17,6 +17,7 @@
   <url>https://github.com/iata-ndc/ndc-java-sdk</url>
 -->
 	<modules>
+		<module>AirShoppingRQ</module>
 		<module>OrderSaleInformationNotificationRQ</module>
 		<module>ServiceDeliveryNotificationRQ</module>
 		<module>ServiceDeliveryRQ</module>
