@@ -9,6 +9,8 @@ import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
+import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
+//import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
 import org.iata.oo.schema.OrderSaleInformationNotificationRQ.IATAOrderSaleInformationNotificationRQ;
 import org.iata.oo.schema.ServiceDeliveryRQ.*;
 import org.iata.oo.schema.ServiceDeliveryRS.*;
@@ -65,6 +67,12 @@ public class OoClient {
 		return marshalAndSend(serviceDeliveryRQ, "ServiceDelivery");
 	}
 
+	public AirShoppingRQ airShopping(AirShoppingRQ airShoppingRQ) throws IOException, ClientException{
+		return marshalAndSend(airShoppingRQ, "AirShoppingRQ");
+	}
+	
+	
+	
 	/**
 	 * Sends ServiceStatusChangeNotification request to server, receives and processes the response.
 	 *
