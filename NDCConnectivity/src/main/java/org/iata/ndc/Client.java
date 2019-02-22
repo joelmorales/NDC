@@ -27,10 +27,13 @@ public class Client
 
 		try
 		{
-			// Make a request to the airline
-			HttpPost request = new HttpPost( "API-ENDPOINT-URL-GOES-HERE" ); 
+			String api_key = "ne9zq57kbpvaut4z9xxm3aqc";
+			String apiEndPoint = "http://iata.api.mashery.com/Zeus/NDC";
 			
-			InputStreamReader is = new InputStreamReader(Client.class.getResourceAsStream( "/resources/AirShoppingRQ.xml" ) );
+			// Make a request to the airline
+			HttpPost request = new HttpPost( apiEndPoint ); 
+			
+			InputStreamReader is = new InputStreamReader(Client.class.getResourceAsStream( "/AirShoppingRQ.xml" ) );
 			StringBuilder sb = new StringBuilder();
 			BufferedReader br = new BufferedReader( is );
 			String read = br.readLine();
@@ -42,7 +45,7 @@ public class Client
 			}
 
 			request.addHeader( "content-type", "application/xml;charset=utf-8" );
-			request.addHeader( "Authorization-Key", "API-KEY-GOES-HERE" );
+			request.addHeader( "Authorization-Key", api_key );
 
 			StringEntity params = new StringEntity ( sb.toString() );
 			request.setEntity( params );

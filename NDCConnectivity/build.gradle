@@ -1,0 +1,79 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+   //sourceSets.test.resources.srcDirs += "${buildDir}/environment/output/cargo"
+   //sourceSets.test.java.srcDirs += generatedSwiftDir
+}
+
+ext{
+	jaxbVersion = '2.2.11'
+	jaxwsVersion = '2.2.10'
+	generatedSrcDir = "$buildDir/generated-sources/xjc"
+	contractJar = "NDCConnectivity.jar"
+}
+
+final def packageName = "com.swacorp.pilots.services.status"
+
+sourceSets.main.java.srcDirs "src/generated-sources/java"
+
+configurations {
+    jaxb
+}
+
+
+dependencies {
+  compile 'com.typesafe.akka:akka-actor_2.12:2.5.9'
+  
+  //generate "com.sun.xml.bind:jaxb-xjc:${jaxbVersion}"
+ //generate "com.sun.xml.ws:jaxws-tools:${jaxwsVersion}"
+  jaxb (
+	  'com.sun.xml.bind:jaxb-xjc:2.2.7',
+	  'com.sun.xml.bind:jaxb-impl:2.2.7'
+  )
+  
+  compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+  compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
+  
+  
+  testCompile 'junit:junit:4.12'
+  
+}
+
+
+task jaxb {
+	System.setProperty('javax.xml.accessExternalSchema', 'all')
+	def jaxbTargetDir = file("src/generated-sources/java")
+
+	doLast {
+		jaxbTargetDir.mkdirs()
+
+		ant.taskdef(
+			name: 'xjc',
+			classname: 'com.sun.tools.xjc.XJCTask',
+			classpath: configurations.jaxb.asPath
+		)
+		ant.jaxbTargetDir = jaxbTargetDir
+
+		ant.xjc(
+			destdir: '${jaxbTargetDir}',
+			package: 'org.iata.oo.schema.AirShoppingRQ',
+			schema: 'src/main/resources/AirShoppingRQ/AirShoppingRQ.xsd'
+		)
+	}
+}
+
+//compileJava.dependsOn jaxb
+
+
+
+ 

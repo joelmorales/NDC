@@ -18,7 +18,7 @@
       <OriginDestination>
         <Departure>
           <AirportCode>LHR</AirportCode>
-          <Date>2018-12-27</Date>
+          <Date>2019-02-27</Date>
         </Departure>
         <Arrival>
           <AirportCode>DXB</AirportCode>
@@ -27,7 +27,7 @@
       <OriginDestination>
         <Departure>
           <AirportCode>DXB</AirportCode>
-          <Date>2018-12-30</Date>
+          <Date>2019-02-28</Date>
         </Departure>
         <Arrival>
           <AirportCode>LHR</AirportCode>
