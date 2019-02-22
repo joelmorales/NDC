@@ -27,7 +27,7 @@
 						<configuration>
 							<schemaDirectory>src/main/resources/</schemaDirectory>
 							<schemaIncludes>
-								<include>AirShoppingRQ/AirShoppingRQ.xsd</include>
+								<include>AirShoppingRQ17.01/AirShoppingRQ.xsd</include>
 							</schemaIncludes>
 							<generatePackage>org.iata.oo.schema.AirShoppingRQ</generatePackage>
 							<generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>

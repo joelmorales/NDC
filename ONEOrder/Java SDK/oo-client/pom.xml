@@ -53,12 +53,23 @@
       <version>0.1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    
     <dependency>
       <groupId>org.iata.oo</groupId>
       <artifactId>ServiceStatusChangeNotificationRQ</artifactId>
       <version>0.1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    
+    
+     <dependency>
+      <groupId>org.iata.oo</groupId>
+      <artifactId>AirShoppingRQ</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+     
+    
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>fluent-hc</artifactId>
