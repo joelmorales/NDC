@@ -30,7 +30,7 @@ public class TestAirShoppingRQ_OneWay {
 		AirShoppingRQ request = new AirShoppingRQBuilder()
 				.addDocument()
 				.addParty()
-				.addCoreQuery("LHR", departureDate, "DXB")
+				.addCoreQueryOneWay("LHR", departureDate, "DXB")
 				.addDataList()
 				.addPreference()
 				.build();

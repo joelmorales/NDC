@@ -111,7 +111,7 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		return this;
 	}
 	
-	public AirShoppingRQBuilder addCoreQuery(String departureCode,XMLGregorianCalendar departureDate,String arrivalCode) {
+	public AirShoppingRQBuilder addCoreQueryOneWay(String departureCode,XMLGregorianCalendar departureDate,String arrivalCode) {
 		
 		AirShoppingRQ.CoreQuery corequery =  new CoreQuery();
 		AirShopReqAttributeQueryType.OriginDestination originDestination = new AirShopReqAttributeQueryType.OriginDestination();

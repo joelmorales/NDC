@@ -5,22 +5,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.iata.oo.builder.AirShoppingRQBuilder;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
 import org.w3c.dom.Document;
@@ -28,6 +34,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class Client_Test_AirShopping_OneWay {
 
@@ -35,75 +42,19 @@ public class Client_Test_AirShopping_OneWay {
 		CloseableHttpClient httpClient = HttpClientBuilder.create().setUserAgent("TestClient").build();
 
 		try {
-			String api_key = "ne9zq57kbpvaut4z9xxm3aqc";
-			String apiEndPoint = "http://iata.api.mashery.com/Zeus/NDC";
+			XMLGregorianCalendar departureDate = getXMLGregorianCalendarDate(2019, 3, 26);
+			String departureCode = "LHR";
+			String arrivalCode = "DXB";
+			AirShoppingRQ airShoppingRQ = getAirShoppingRQ_OneWay(departureDate, departureCode, arrivalCode);
 
-			// Make a request to the airline
-			HttpPost request = new HttpPost(apiEndPoint);
-
-			request.addHeader("content-type", "application/xml;charset=utf-8");
-			request.addHeader("Authorization-Key", api_key);
-
-			System.out.println("Sending request body:");
-
-			XMLGregorianCalendar departureDate=getXMLGregorianCalendarDate(2019,3,26);
-			/*GregorianCalendar cal = new GregorianCalendar();
-			cal.set(2019, 3, 26);
-			XMLGregorianCalendar departureDate = null;
-			try {
-				departureDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}*/
-
-			AirShoppingRQ airShoppingRQ = new AirShoppingRQBuilder()
-					.addDocument().addParty().changeHeader()
-					.addCoreQuery("LHR", departureDate, "DXB")
-					.addDataList().addPreference().build();
-
-			
-			String xmlObject = jaxbObjectToXML(airShoppingRQ)
-					.replaceAll("2017.1", "2017.2");
-					
+			String xmlObject = jaxbObjectToXML(airShoppingRQ).replaceAll("2017.1", "2017.2");
 			System.out.println(xmlObject);
 
-			StringEntity params = new StringEntity(xmlObject);
-			request.setEntity(params);
-
+			HttpPost request = prepareRequest(xmlObject);
 			HttpResponse response = httpClient.execute(request);
 
-			System.out.println("------------------------------------------------------------");
-			System.out.println("Received Response to request:");
-			System.out.println(response.toString());
-			System.out.println("------------------------------------------------------------");
-
-			// Read the response
-			InputStreamReader is = new InputStreamReader(response.getEntity().getContent());
-			StringBuilder sb = new StringBuilder();
-			BufferedReader br = new BufferedReader(is);
-			String read = br.readLine();
-
-			while (read != null) {
-				sb.append(read);
-				read = br.readLine();
-			}
-
-			System.out.println("------------------------------------------------------------");
-			System.out.println("Received Response to request:");
-			System.out.println(sb.toString());
-			System.out.println("------------------------------------------------------------");
-
-			// Use SAX to parse the document
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			factory.setNamespaceAware(true);
-			InputSource isource = new InputSource(new StringReader(sb.toString()));
-
-			Document doc = builder.parse(isource);
-
-			System.out.println("Selecting 1st offer");
-			dumpChildren(doc.getElementsByTagName("Offer").item(0));
-			 
+			readTheResponse(response);
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -111,20 +62,76 @@ public class Client_Test_AirShopping_OneWay {
 		}
 	}
 
-	private static XMLGregorianCalendar getXMLGregorianCalendarDate(int year,int month, int date) {
+	private void getAirShoppingRS(HttpResponse response) throws IOException, JAXBException {
+		String xmlResponse = EntityUtils.toString(response.getEntity()).replaceAll("2017.2", "2017.1");
+		JAXBContext jaxbContext =JAXBContext.newInstance(AirShoppingRQ.class);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			InputSource isource = new InputSource(new StringReader(xmlResponse));
+		
+		AirShoppingRQ responseAirShoppingRQ = (AirShoppingRQ) jaxbUnmarshaller.unmarshal(isource);
+		System.out.println(responseAirShoppingRQ.toString());
+	}
+	
+	private static AirShoppingRQ getAirShoppingRQ_OneWay(XMLGregorianCalendar departureDate, String departureCode,
+			String arrivalCode) {
+		
+		AirShoppingRQ airShoppingRQ = new AirShoppingRQBuilder()
+				.addDocument()
+				.addParty()
+				.changeHeader()
+				.addCoreQueryOneWay(departureCode, departureDate, arrivalCode)
+				.addDataList()
+				.addPreference().build();
+		
+		return airShoppingRQ;
+	}
+
+	private static HttpPost prepareRequest(String xmlObject) throws UnsupportedEncodingException {
+		String api_key = "ne9zq57kbpvaut4z9xxm3aqc";
+		String apiEndPoint = "http://iata.api.mashery.com/Zeus/NDC";
+
+		HttpPost request = new HttpPost(apiEndPoint);
+
+		request.addHeader("content-type", "application/xml;charset=utf-8");
+		request.addHeader("Authorization-Key", api_key);
+
+		StringEntity params = new StringEntity(xmlObject);
+		request.setEntity(params);
+		return request;
+	}
+
+	private static void readTheResponse(HttpResponse response)
+			throws IllegalStateException, IOException, ParserConfigurationException, SAXException {
+	
+		System.out.println("Received Response to request:");
+		String responseEntity = EntityUtils.toString(response.getEntity());
+		System.out.println(responseEntity.toString());
+		
+		// Use SAX to parse the document
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		InputSource isource = new InputSource(new StringReader(responseEntity));
+
+		Document doc = builder.parse(isource);
+
+		System.out.println("Selecting 1st offer");
+		dumpChildren(doc.getElementsByTagName("Offer").item(0));
+	}
+
+	private static XMLGregorianCalendar getXMLGregorianCalendarDate(int year, int month, int date) {
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.set(year, (month-1), date);
+		cal.set(year, (month - 1), date);
 		XMLGregorianCalendar departureDate = null;
 		try {
 			departureDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-					
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		//return departureDate != null ? Optional.of(departureDate): Optional.empty();
+		// return departureDate != null ? Optional.of(departureDate): Optional.empty();
 		return departureDate;
 	}
-	
+
 	private static String jaxbObjectToXML(AirShoppingRQ customer) {
 		String xmlString = "";
 		try {
