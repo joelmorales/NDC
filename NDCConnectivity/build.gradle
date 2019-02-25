@@ -51,7 +51,7 @@ dependencies {
 }
 
 
-task jaxb {
+task jaxbAirShoppingRQ {
 	System.setProperty('javax.xml.accessExternalSchema', 'all')
 	def jaxbTargetDir = file("src/generated-sources/java")
 
@@ -72,6 +72,29 @@ task jaxb {
 		)
 	}
 }
+
+task jaxbAirShoppingRS {
+	System.setProperty('javax.xml.accessExternalSchema', 'all')
+	def jaxbTargetDir = file("src/generated-sources/java")
+
+	doLast {
+		jaxbTargetDir.mkdirs()
+
+		ant.taskdef(
+			name: 'xjc',
+			classname: 'com.sun.tools.xjc.XJCTask',
+			classpath: configurations.jaxb.asPath
+		)
+		ant.jaxbTargetDir = jaxbTargetDir
+
+		ant.xjc(
+			destdir: '${jaxbTargetDir}',
+			package: 'org.iata.oo.schema.AirShoppingRS',
+			schema: 'src/main/resources/AirShoppingRS/AirShoppingRS.xsd'
+		)
+	}
+}
+
 
 //compileJava.dependsOn jaxb
 
