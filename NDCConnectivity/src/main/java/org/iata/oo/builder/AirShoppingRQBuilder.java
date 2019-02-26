@@ -183,6 +183,20 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		return this;
 	}
 	
+	public static AirShoppingRQ buildAirShoppingRQ_OneWay(XMLGregorianCalendar departureDate, String departureCode,
+			String arrivalCode) {
+		
+		AirShoppingRQ airShoppingRQ = new AirShoppingRQBuilder()
+				.addDocument()
+				.addParty()
+				.changeHeader()
+				.addCoreQueryOneWay(departureCode, departureDate, arrivalCode)
+				.addDataList()
+				.addPreference().build();
+		
+		return airShoppingRQ;
+	}
+	
 	public AirShoppingRQBuilder changeHeader() {
 		request.setEchoToken("{{$guid}}");
 	
