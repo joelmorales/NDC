@@ -116,6 +116,21 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		AirShoppingRQ.CoreQuery corequery =  new CoreQuery();
 		AirShopReqAttributeQueryType.OriginDestination originDestination = new AirShopReqAttributeQueryType.OriginDestination();
 		
+		
+		originDestination = addOriginDestination(departureCode,departureDate,arrivalCode);
+		
+		
+		AirShopReqAttributeQueryType destinations= new AirShopReqAttributeQueryType();
+		destinations.getOriginDestination().add(originDestination);
+		
+		corequery.setOriginDestinations(destinations);
+		request.setCoreQuery(corequery);
+		return this;
+	}
+	
+	private AirShopReqAttributeQueryType.OriginDestination addOriginDestination(String departureCode,XMLGregorianCalendar departureDate,String arrivalCode) {
+		AirShopReqAttributeQueryType.OriginDestination originDestination = new AirShopReqAttributeQueryType.OriginDestination();
+		
 		Departure departure = new Departure();
 		FlightDepartureType.AirportCode airportCode =  new FlightDepartureType.AirportCode();
 		airportCode.setValue(departureCode);
@@ -130,17 +145,7 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		originDestination.setDeparture(departure);
 		originDestination.setArrival(arrival);
 		
-		AirShopReqAttributeQueryType destinations= new AirShopReqAttributeQueryType();
-		destinations.getOriginDestination().add(originDestination);
-		
-		corequery.setOriginDestinations(destinations);
-		
-		
-		//CoreDateGrpType core= new  CoreDateGrpType();
-		
-		
-		request.setCoreQuery(corequery);
-		return this;
+		return originDestination;
 	}
 	
 	public AirShoppingRQBuilder addParty() {
