@@ -170,13 +170,9 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		participant.setAggregatorParticipant(aggregator);
 		participants.getParticipant().add(participant);
 
-		// ObjectFactory factory = new ObjectFactory();
-		// JAXBElement<MsgPartiesType.Participants> jaxbParticipants=
-		// factory.createMsgPartiesTypeParticipants(participants);
-
+		
 		party.setSender(sender);
-		// party.setParticipants(jaxbParticipants);
-
+		
 		request.setParty(party);
 
 		return this;
