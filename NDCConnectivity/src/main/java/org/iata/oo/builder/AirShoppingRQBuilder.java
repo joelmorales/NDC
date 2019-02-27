@@ -39,7 +39,7 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 	 * Creates a new instance of ServiceDeliveryRQBuilder.
 	 */
 	public AirShoppingRQBuilder() { // {@link #clear)
-		 doInitialize();
+		doInitialize();
 	}
 
 	/**
@@ -52,169 +52,157 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 
 	public AirShoppingRQBuilder addDocument() {
 
-		MsgDocumentType document= new  MsgDocumentType();
+		MsgDocumentType document = new MsgDocumentType();
 		document.setName("KRONOS NDC GATEWAY");
 		document.setReferenceVersion("1.0");
-		
+
 		request.setDocument(document);
-		
+
 		return this;
 	}
 
 	public AirShoppingRQBuilder addPreference() {
-		
+
 		AirShoppingRQ.Preference preference = new Preference();
 		FarePreferencesType farePreference = new FarePreferencesType();
-		
-		FarePreferencesType.Types types =  new FarePreferencesType.Types();
-		FarePreferencesType.Types.Type type =new FarePreferencesType.Types.Type();
+
+		FarePreferencesType.Types types = new FarePreferencesType.Types();
+		FarePreferencesType.Types.Type type = new FarePreferencesType.Types.Type();
 		type.setValue("759");
 		types.getType().add(type);
-		
-		
-		CabinPreferencesType cabin = new  CabinPreferencesType();
-		CabinType cabinType= new  CabinType();
+
+		CabinPreferencesType cabin = new CabinPreferencesType();
+		CabinType cabinType = new CabinType();
 		cabinType.setCode("M");
 		cabin.getCabinType().add(cabinType);
 		farePreference.setTypes(types);
-		
+
 		preference.setFarePreferences(farePreference);
 		preference.setCabinPreferences(cabin);
-		
+
 		request.setPreference(preference);
-		
+
 		return this;
 	}
-	
+
 	public AirShoppingRQBuilder addDataList() {
-		
+
 		AirShoppingRQ.DataLists dataList = new DataLists();
-		PassengerType passenger1= new PassengerType();
+		PassengerType passenger1 = new PassengerType();
 		passenger1.setPTC("ADT");
 		passenger1.setPassengerID("SH1");
-		
-		PassengerType passenger2= new PassengerType();
+
+		PassengerType passenger2 = new PassengerType();
 		passenger2.setPTC("CHD");
 		passenger2.setPassengerID("SH2");
-		
-		AirShoppingRQ.DataLists.PassengerList passengerList = new  AirShoppingRQ.DataLists.PassengerList();
-		
+
+		AirShoppingRQ.DataLists.PassengerList passengerList = new AirShoppingRQ.DataLists.PassengerList();
+
 		passengerList.getPassenger().add(passenger1);
 		passengerList.getPassenger().add(passenger2);
-		//passengerList.add(passenger1);
-		//passengerList.add(passenger2);
 		
 		dataList.setPassengerList(passengerList);
-		//dataList.set
 		
 		request.setDataLists(dataList);
 		return this;
 	}
-	
-	public AirShoppingRQBuilder addCoreQueryOneWay(String departureCode,XMLGregorianCalendar departureDate,String arrivalCode) {
-		
-		AirShoppingRQ.CoreQuery corequery =  new CoreQuery();
-		AirShopReqAttributeQueryType.OriginDestination originDestination = new AirShopReqAttributeQueryType.OriginDestination();
-		
-		
-		originDestination = addOriginDestination(departureCode,departureDate,arrivalCode);
-		
-		
-		AirShopReqAttributeQueryType destinations= new AirShopReqAttributeQueryType();
+
+	public AirShoppingRQBuilder addCoreQueryOneWay(String departureCode, XMLGregorianCalendar departureDate,
+			String arrivalCode) {
+
+		AirShoppingRQ.CoreQuery corequery = new CoreQuery();
+		AirShopReqAttributeQueryType.OriginDestination originDestination = 
+				addOriginDestination(departureCode, departureDate, arrivalCode);
+
+		AirShopReqAttributeQueryType destinations = new AirShopReqAttributeQueryType();
 		destinations.getOriginDestination().add(originDestination);
-		
+
 		corequery.setOriginDestinations(destinations);
 		request.setCoreQuery(corequery);
 		return this;
 	}
-	
-	private AirShopReqAttributeQueryType.OriginDestination addOriginDestination(String departureCode,XMLGregorianCalendar departureDate,String arrivalCode) {
+
+	private AirShopReqAttributeQueryType.OriginDestination addOriginDestination(String departureCode,
+			XMLGregorianCalendar departureDate, String arrivalCode) {
 		AirShopReqAttributeQueryType.OriginDestination originDestination = new AirShopReqAttributeQueryType.OriginDestination();
-		
+
 		Departure departure = new Departure();
-		FlightDepartureType.AirportCode airportCode =  new FlightDepartureType.AirportCode();
+		FlightDepartureType.AirportCode airportCode = new FlightDepartureType.AirportCode();
 		airportCode.setValue(departureCode);
 		departure.setDate(departureDate);
 		departure.setAirportCode(airportCode);
-		
-		FlightArrivalType.AirportCode airportArrivalCode =  new FlightArrivalType.AirportCode();
+
+		FlightArrivalType.AirportCode airportArrivalCode = new FlightArrivalType.AirportCode();
 		airportArrivalCode.setValue(arrivalCode);
 		FlightArrivalType arrival = new FlightArrivalType();
 		arrival.setAirportCode(airportArrivalCode);
-		
+
 		originDestination.setDeparture(departure);
 		originDestination.setArrival(arrival);
-		
+
 		return originDestination;
 	}
-	
+
 	public AirShoppingRQBuilder addParty() {
-		
-		MsgPartiesType party = new  MsgPartiesType();
-		
-		Sender sender = new  Sender();
-		
-		TravelAgencySenderType travelAgency = new  TravelAgencySenderType();
+
+		MsgPartiesType party = new MsgPartiesType();
+
+		Sender sender = new Sender();
+
+		TravelAgencySenderType travelAgency = new TravelAgencySenderType();
 		travelAgency.setName("JR TECHNOLOGIES");
 		travelAgency.setIATANumber("20200154");
-		AgencyIDType agencyID = new  AgencyIDType();
-		//agencyID.setOwner("Z9");
+		AgencyIDType agencyID = new AgencyIDType();
+		// agencyID.setOwner("Z9");
 		agencyID.setValue("00010080");
 		travelAgency.setAgencyID(agencyID);
 		sender.setTravelAgencySender(travelAgency);
-		
-	
-		MsgPartiesType.Participants participants = new  Participants();
-		Participant participant= new  Participant();
-		AggregatorParticipantType aggregator= new  AggregatorParticipantType();
+
+		MsgPartiesType.Participants participants = new Participants();
+		Participant participant = new Participant();
+		AggregatorParticipantType aggregator = new AggregatorParticipantType();
 		aggregator.setSequenceNumber(new BigInteger("1"));
 		aggregator.setName("JR TECHNOLOGIES");
-		AggregatorIDType aggregatorType= new  AggregatorIDType();
+		AggregatorIDType aggregatorType = new AggregatorIDType();
 		aggregatorType.setValue("88888888");
 		aggregator.setAggregatorID(aggregatorType);
-		 
+
 		participant.setAggregatorParticipant(aggregator);
 		participants.getParticipant().add(participant);
-		
-		//ObjectFactory factory = new  ObjectFactory();
-		//JAXBElement<MsgPartiesType.Participants> jaxbParticipants= factory.createMsgPartiesTypeParticipants(participants);
-		
-		
+
+		// ObjectFactory factory = new ObjectFactory();
+		// JAXBElement<MsgPartiesType.Participants> jaxbParticipants=
+		// factory.createMsgPartiesTypeParticipants(participants);
+
 		party.setSender(sender);
-		//party.setParticipants(jaxbParticipants);
-		
+		// party.setParticipants(jaxbParticipants);
+
 		request.setParty(party);
-		
+
 		return this;
 	}
-	
+
 	public static AirShoppingRQ buildAirShoppingRQ_OneWay(XMLGregorianCalendar departureDate, String departureCode,
 			String arrivalCode) {
-		
-		AirShoppingRQ airShoppingRQ = new AirShoppingRQBuilder()
-				.addDocument()
-				.addParty()
-				.changeHeader()
-				.addCoreQueryOneWay(departureCode, departureDate, arrivalCode)
-				.addDataList()
-				.addPreference().build();
-		
+
+		AirShoppingRQ airShoppingRQ = new AirShoppingRQBuilder().addDocument().addParty().changeHeader()
+				.addCoreQueryOneWay(departureCode, departureDate, arrivalCode).addDataList().addPreference().build();
+
 		return airShoppingRQ;
 	}
-	
+
 	public AirShoppingRQBuilder changeHeader() {
 		request.setEchoToken("{{$guid}}");
-	
+
 		return this;
 	}
-	
+
 	@Override
 	public AirShoppingRQ build() {
 		addRequestAttributes();
 		return request;
 	}
 
-	
 	private void addRequestAttributes() {
 		request.setVersion(VERSION);
 	}
