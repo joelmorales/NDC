@@ -28,3 +28,6 @@ target/**
 **/*.class
 **/classes/**
 *.class
+NDC-GraphQL-Client/.DS_Store
+.DS_Store
+/.DS_Store
