@@ -11,7 +11,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.iata.crosscutting.GenericCalendar;
 import org.iata.crosscutting.XMLObjectTool;
 import org.iata.oo.builder.AirShoppingRQBuilder;
+import org.iata.oo.builder.AirShoppingRSBuilder;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
+import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 
 public class Client_Test_AirShopping_OneWay {
 
@@ -31,7 +33,7 @@ public class Client_Test_AirShopping_OneWay {
 			HttpResponse response = httpClient.execute(request);
 
 			XMLObjectTool.printXMLEntity(response.getEntity());
-			//AirShoppingRS airShoppingRS=getAirShoppingRS(response.getEntity());
+			AirShoppingRS airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(response.getEntity());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

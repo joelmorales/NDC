@@ -25,5 +25,16 @@ public class AirShoppingRSBuilder {
 		return responseAirShoppingRS;
 	}
 	
+	public static AirShoppingRS getAirShoppingRS(String xmlFile) throws IOException, JAXBException {
+		//String xmlResponse = EntityUtils.toString(entity).replaceAll("2017.2", "2017.1");
+		JAXBContext jaxbContext =JAXBContext.newInstance(AirShoppingRS.class);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			InputSource isource = new InputSource(new StringReader(xmlFile));
+		
+		AirShoppingRS responseAirShoppingRS = (AirShoppingRS) jaxbUnmarshaller.unmarshal(isource);
+		System.out.println(responseAirShoppingRS.toString());
+		return responseAirShoppingRS;
+		
+	}
 	
 }
