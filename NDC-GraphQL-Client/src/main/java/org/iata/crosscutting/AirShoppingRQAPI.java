@@ -11,7 +11,7 @@ import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 
 public class AirShoppingRQAPI {
 
-	public static AirShoppingRS getResponse() {
+	public static AirShoppingRS getStubResponse() {
 
 		try {
 			InputStreamReader is = new InputStreamReader(ReadResponse.class.getResourceAsStream("/AirShoppingRS.xml"));

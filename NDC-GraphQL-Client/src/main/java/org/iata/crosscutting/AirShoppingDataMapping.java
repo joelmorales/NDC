@@ -56,6 +56,21 @@ public class AirShoppingDataMapping {
 		return departures;
 	}
 	
+	public List<Map<String, String>> fillArrivalsListDataFetcher(AirShoppingRS airSRS) {
+		List<Map<String, String>> arrivals = new ArrayList<Map<String, String>>();
+		for(ListOfFlightSegmentType flight: airSRS.getDataLists().getFlightSegmentList().getFlightSegment()) {
+			arrivals.add(
+					ImmutableMap.of(
+					 	"segmentKey",getValue(flight.getSegmentKey()),
+						"airporCode", getValue(flight.getArrival().getAirportCode().getValue()),
+						"date",getValue(flight.getArrival().getDate().toString()),
+						"time",getValue(flight.getArrival().getTime()),
+						"airportName",getValue(flight.getArrival().getAirportCode().getValue())
+					));
+		}
+		return arrivals;
+	}
+	
 	private String getValue(String value) {
 		return Optional.ofNullable(value).orElse("");
 	}

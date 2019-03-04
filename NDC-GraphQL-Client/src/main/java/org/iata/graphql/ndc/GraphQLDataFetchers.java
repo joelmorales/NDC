@@ -40,13 +40,15 @@ public class GraphQLDataFetchers {
 //	
 //	);
 	
-	private static List<Map<String, String>> arrivalMap = Arrays.asList(
-			ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1", "airporCode", "PRG", "date", "2019-07-27", "time", "23:01",
-					"airportName", "Václav Havel Airport Prague"),
-			ImmutableMap.of("segmentKey", "SEG_PRGDXB_7", "airporCode", "DXB", "date", "2019-07-28", "time", "01:59",
-					"airportName", "Dubai International Airport")
+	private static List<Map<String, String>> arrivalMap= new ArrayList<Map<String, String>>();
 	
-	);
+//	private static List<Map<String, String>> arrivalMap = Arrays.asList(
+//			ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1", "airporCode", "PRG", "date", "2019-07-27", "time", "23:01",
+//					"airportName", "Václav Havel Airport Prague"),
+//			ImmutableMap.of("segmentKey", "SEG_PRGDXB_7", "airporCode", "DXB", "date", "2019-07-28", "time", "01:59",
+//					"airportName", "Dubai International Airport")
+//	
+//	);
 
 	public DataFetcher getDepartures() {
 		return dataFetchingEnvironment -> {
@@ -66,7 +68,7 @@ public class GraphQLDataFetchers {
 		return dataFetchingEnvironment -> {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
 			String segmentKey = depar.get("segmentKey");
-
+			arrivalMap = airShoppingDataMapping.fillArrivalsListDataFetcher(airShoppingRS);
 			System.out.println("Arrivals List:" + arrivalMap.size());
 			return arrivalMap.stream()
 					.filter(d -> d.get("segmentKey").equals(segmentKey))
@@ -85,7 +87,7 @@ public class GraphQLDataFetchers {
 	}
 
 	public DataFetcher getAirShoppingByDate() {
-		airShoppingRS = AirShoppingRQAPI.getResponse();
+		airShoppingRS = AirShoppingRQAPI.getStubResponse();
 		return dataFetchingEnvironment -> {
 			airShoppingMap = airShoppingDataMapping.fillAirShoppingDataFetcher(airShoppingRS);
 			System.out.println("Maps Count:" + airShoppingMap.size());
