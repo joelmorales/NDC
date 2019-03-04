@@ -58,8 +58,18 @@ public class ReadResponse {
 	
 	private void prepareAirShoppingData(String xmlFile) throws IOException, JAXBException {
 		AirShoppingRS airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(xmlFile);
-		fillFlightSegmentListDataFetcher(airShoppingRS);
+		//fillFlightSegmentListDataFetcher(airShoppingRS);
 		
+	}
+	
+	public void fillDeparturesListDataFetcher(AirShoppingRS airSRS) {
+		for(ListOfFlightSegmentType flight: airSRS.getDataLists().getFlightSegmentList().getFlightSegment()) {
+			//flight.getDeparture().getAirportCode()
+			//flight.getDeparture().getDate()
+			//flight.getDeparture().getTime()
+			//flight.getDeparture().getAirportCode()
+			System.out.println("Value:"+flight.getSegmentKey());
+		}
 	}
 	
 	public void fillFlightSegmentListDataFetcher(AirShoppingRS airSRS){

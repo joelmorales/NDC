@@ -24,19 +24,21 @@ public class GraphQLDataFetchers {
 
 	private AirShoppingRS airShoppingRS;
 	private static List<Map<String, String>> airShoppingMap = new ArrayList<Map<String, String>>();
+	private static List<Map<String, String>> flightSegment = new ArrayList<Map<String, String>>();
+	
+//	private static List<Map<String, String>> flightSegment = Arrays
+//			.asList(ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1"), ImmutableMap.of("segmentKey", "SEG_PRGDXB_7"));
 
-	private static List<Map<String, String>> flightSegment = Arrays
-			.asList(ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1"), ImmutableMap.of("segmentKey", "SEG_PRGDXB_7"));
-
 	
+	private static List<Map<String, String>> departureMap= new ArrayList<Map<String, String>>();
 	
-	private static List<Map<String, String>> departureMap = Arrays.asList(
-			ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1", "airporCode", "LHR", "date", "2019-07-27", "time", "20:10",
-					"airportName", "Heathrow Airport"),
-			ImmutableMap.of("segmentKey", "SEG_PRGDXB_7", "airporCode", "LHR", "date", "2019-07-27", "time", "18:00",
-					"airportName", "Vaclav Havel Airport Prague")
-	
-	);
+//	private static List<Map<String, String>> departureMap = Arrays.asList(
+//			ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1", "airporCode", "LHR", "date", "2019-07-27", "time", "20:10",
+//					"airportName", "Heathrow Airport"),
+//			ImmutableMap.of("segmentKey", "SEG_PRGDXB_7", "airporCode", "LHR", "date", "2019-07-27", "time", "18:00",
+//					"airportName", "Vaclav Havel Airport Prague")
+//	
+//	);
 	
 	private static List<Map<String, String>> arrivalMap = Arrays.asList(
 			ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1", "airporCode", "PRG", "date", "2019-07-27", "time", "23:01",
@@ -50,7 +52,8 @@ public class GraphQLDataFetchers {
 		return dataFetchingEnvironment -> {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
 			String segmentKey = depar.get("segmentKey");
-
+			
+			departureMap=airShoppingDataMapping.fillDeparturesListDataFetcher(airShoppingRS);
 			System.out.println("Departure List:" + departureMap.size());
 			return departureMap.stream()
 					.filter(d -> d.get("segmentKey").equals(segmentKey))
@@ -73,9 +76,10 @@ public class GraphQLDataFetchers {
 	}
 
 	public DataFetcher getFlightSegmentList() {
-		System.out.println("Enter List:");
+		//System.out.println("Enter List:");
 		return dataFetchingEnvironment -> {
-			System.out.println("List:" + flightSegment.size());
+			flightSegment = airShoppingDataMapping.fillFlightSegmentListDataFetcher(airShoppingRS);
+			System.out.println("Flight Segment List count:" + flightSegment.size());
 			return flightSegment;
 		};
 	}
