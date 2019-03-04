@@ -12,16 +12,19 @@ HELP.md
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-/out/
+**/build/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+**/.gradle/
+**/.settings
+**/bin/**
+bin/**
+.classpath
+.project
+/bin
+/bin
+target/**
+/target/**
+.class
+**/*.class
+**/classes/**
+*.class
