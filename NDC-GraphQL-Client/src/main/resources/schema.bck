@@ -1,0 +1,16 @@
+type FlightSegmentList{
+	flightSegment: FlightSegment
+}
+
+type FlightSegment{
+	segmentKey : String
+	departure : Departure
+}
+
+type Departure{
+	segmentKey : String
+	airporCode: String
+	date: String
+	time: String
+	airportName: String
+}

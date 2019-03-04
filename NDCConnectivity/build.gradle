@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
+group = 'org.iata'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -23,7 +24,7 @@ ext{
 	contractJar = "NDCConnectivity.jar"
 }
 
-final def packageName = "com.swacorp.pilots.services.status"
+//final def packageName = "com.swacorp.pilots.services.status"
 
 sourceSets.main.java.srcDirs "src/generated-sources/java"
 
@@ -33,7 +34,7 @@ configurations {
 
 
 dependencies {
-  compile 'com.typesafe.akka:akka-actor_2.12:2.5.9'
+  //compile 'com.typesafe.akka:akka-actor_2.12:2.5.9'
   
   //generate "com.sun.xml.bind:jaxb-xjc:${jaxbVersion}"
  //generate "com.sun.xml.ws:jaxws-tools:${jaxwsVersion}"
@@ -51,6 +52,7 @@ dependencies {
   
 }
 
+mainClassName = "org.iata.ndc.Client_Test_AirShopping_OneWay"
 
 task jaxbAirShoppingRQ {
 	System.setProperty('javax.xml.accessExternalSchema', 'all')

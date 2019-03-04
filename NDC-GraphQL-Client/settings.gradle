@@ -1,6 +1,14 @@
-pluginManagement {
+rootProject.name = 'NDC-GraphQL-Client'
+
+//include ':NDCConnectivity'
+
+//project (':NDCConnectivity').projectDir = "$rootDir/NDCConnectivity" as File
+
+	
+/*pluginManagement {
 	repositories {
 		gradlePluginPortal()
 	}
-}
-rootProject.name = 'NDC-GraphQL-Client'
+}*/
+
+

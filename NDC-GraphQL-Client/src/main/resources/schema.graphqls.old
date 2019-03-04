@@ -1,0 +1,32 @@
+type Query{
+	airShoppingByDate(departureCode: String): AirShopping
+}
+
+type AirShopping{
+	departureCode: String
+	referenceVersion: String
+	shoppingResponseId: String
+	flightSegmentList : [FlightSegmentList]
+}
+
+type FlightSegmentList{
+	segmentKey: String
+	departure: Departure
+	arrival : Arrival
+}
+
+type Departure{
+	segmentKey: String
+	airporCode: String
+	date: String
+	time: String
+	airportName: String
+}
+
+type Arrival{
+	segmentKey: String
+	airporCode: String
+	date: String
+	time: String
+	airportName: String
+}
