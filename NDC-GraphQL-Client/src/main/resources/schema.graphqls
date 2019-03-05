@@ -14,7 +14,16 @@ type AirShopping{
 type FlightSegmentList{
 	segmentKey: String
 	departure: Departure
-	arrival : Arrival
+	arrival: Arrival
+	alaCarteOffer: [AlaCarteOffer]
+}
+
+type AlaCarteOffer{
+	segmentKey: String
+	unitPrice: String
+	totalAmount: String
+	serviceName: String
+	description: String
 }
 
 type Departure{

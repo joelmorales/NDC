@@ -31,7 +31,7 @@ public class GraphQLProvider {
 
 	@PostConstruct
 	public void init() throws IOException {
-		URL url = Resources.getResource("schema.graphqls.old");
+		URL url = Resources.getResource("schema.graphqls");
 		String sdl = Resources.toString(url, Charsets.UTF_8);
 		GraphQLSchema graphQLSchema = buildSchema(sdl);
 		this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();
@@ -52,7 +52,8 @@ public class GraphQLProvider {
 						.dataFetcher("flightSegmentList", graphQLDataFetchers.getFlightSegmentList()))
 				.type(newTypeWiring("FlightSegmentList")
 						.dataFetcher("departure", graphQLDataFetchers.getDepartures())
-						.dataFetcher("arrival", graphQLDataFetchers.getArrivals()))
+						.dataFetcher("arrival", graphQLDataFetchers.getArrivals())
+						.dataFetcher("alaCarteOffer", graphQLDataFetchers.getAlaCarteOffers()))
 						
 				.build();
 	}

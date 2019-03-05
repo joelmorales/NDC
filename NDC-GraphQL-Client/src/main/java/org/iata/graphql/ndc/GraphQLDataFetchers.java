@@ -25,6 +25,8 @@ public class GraphQLDataFetchers {
 	private AirShoppingRS airShoppingRS;
 	private static List<Map<String, String>> airShoppingMap = new ArrayList<Map<String, String>>();
 	private static List<Map<String, String>> flightSegment = new ArrayList<Map<String, String>>();
+	private static List<Map<String, String>> aLaCarteoffersMap= new ArrayList<Map<String, String>>();
+	
 	
 //	private static List<Map<String, String>> flightSegment = Arrays
 //			.asList(ImmutableMap.of("segmentKey", "SEG_LHRPRG_8_1"), ImmutableMap.of("segmentKey", "SEG_PRGDXB_7"));
@@ -50,13 +52,38 @@ public class GraphQLDataFetchers {
 //	
 //	);
 
+	
+	
+	public DataFetcher getAlaCarteOffers() {
+		return dataFetchingEnvironment ->{
+			Map<String, String> depar = dataFetchingEnvironment.getSource();
+			String segmentKey = depar.get("segmentKey");
+			
+			aLaCarteoffersMap = airShoppingDataMapping.fillAlaCarteOffersDataFetcher(airShoppingRS,segmentKey);
+			System.out.println("A La carte List:" + aLaCarteoffersMap.size());
+			
+			return aLaCarteoffersMap;
+			
+		};
+			
+	}
+	
+	public DataFetcher getFlightSegmentList() {
+			//System.out.println("Enter List:");
+			return dataFetchingEnvironment -> {
+				flightSegment = airShoppingDataMapping.fillFlightSegmentListDataFetcher(airShoppingRS);
+				System.out.println("Flight Segment List count:" + flightSegment.size());
+				return flightSegment;
+			};
+	}
+		
 	public DataFetcher getDepartures() {
 		return dataFetchingEnvironment -> {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
 			String segmentKey = depar.get("segmentKey");
 			
 			departureMap=airShoppingDataMapping.fillDeparturesListDataFetcher(airShoppingRS);
-			System.out.println("Departure List:" + departureMap.size());
+			//System.out.println("Departure List:" + departureMap.size());
 			return departureMap.stream()
 					.filter(d -> d.get("segmentKey").equals(segmentKey))
 					.findFirst()
@@ -69,7 +96,7 @@ public class GraphQLDataFetchers {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
 			String segmentKey = depar.get("segmentKey");
 			arrivalMap = airShoppingDataMapping.fillArrivalsListDataFetcher(airShoppingRS);
-			System.out.println("Arrivals List:" + arrivalMap.size());
+			//System.out.println("Arrivals List:" + arrivalMap.size());
 			return arrivalMap.stream()
 					.filter(d -> d.get("segmentKey").equals(segmentKey))
 					.findFirst()
@@ -77,27 +104,18 @@ public class GraphQLDataFetchers {
 			};
 	}
 
-	public DataFetcher getFlightSegmentList() {
-		//System.out.println("Enter List:");
-		return dataFetchingEnvironment -> {
-			flightSegment = airShoppingDataMapping.fillFlightSegmentListDataFetcher(airShoppingRS);
-			System.out.println("Flight Segment List count:" + flightSegment.size());
-			return flightSegment;
-		};
-	}
-
 	public DataFetcher getAirShoppingByDate() {
 		return dataFetchingEnvironment -> {
 			String departureCode = dataFetchingEnvironment.getArgument("departureCode");
 			String departureDate = dataFetchingEnvironment.getArgument("departureDate");
 			String arrivalCode = dataFetchingEnvironment.getArgument("arrivalCode");
-			System.out.println("D Code:"+departureCode+", Date:"+departureDate+" ,A Code:"+arrivalCode);
+			//System.out.println("D Code:"+departureCode+", Date:"+departureDate+" ,A Code:"+arrivalCode);
 			
-			//airShoppingRS = AirShoppingRQAPI.getStubResponse(departureCode,departureDate,arrivalCode);
-			airShoppingRS = AirShoppingRQAPI.getResponse(departureCode,departureDate,arrivalCode);
+			airShoppingRS = AirShoppingRQAPI.getStubResponse(departureCode,departureDate,arrivalCode);
+			//airShoppingRS = AirShoppingRQAPI.getResponse(departureCode,departureDate,arrivalCode);
 			
 			airShoppingMap = airShoppingDataMapping.fillAirShoppingDataFetcher(airShoppingRS);
-			System.out.println("Maps Count:" + airShoppingMap.size());
+			//System.out.println("Maps Count:" + airShoppingMap.size());
 			
 			return airShoppingMap.stream()
 					// .filter(air -> air.get("departureCode").equals(departureCode))
