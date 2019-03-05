@@ -76,7 +76,7 @@ task jaxbAirShoppingRQ {
 		ant.xjc(
 			destdir: '${jaxbTargetDir}',
 			package: 'org.iata.oo.schema.AirShoppingRQ',
-			schema: 'src/main/resources/AirShoppingRQ/AirShoppingRQ.xsd'
+			schema: 'src/main/resources/AirShoppingRQ17_2/AirShoppingRQ.xsd'
 		)
 	}
 }
@@ -98,7 +98,7 @@ task jaxbAirShoppingRS {
 		ant.xjc(
 			destdir: '${jaxbTargetDir}',
 			package: 'org.iata.oo.schema.AirShoppingRS',
-			schema: 'src/main/resources/AirShoppingRS/AirShoppingRS.xsd'
+			schema: 'src/main/resources/AirShoppingRS17_2/AirShoppingRS.xsd'
 		)
 	}
 }

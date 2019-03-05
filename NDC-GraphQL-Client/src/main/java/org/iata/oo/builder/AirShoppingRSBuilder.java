@@ -15,7 +15,8 @@ import org.xml.sax.InputSource;
 public class AirShoppingRSBuilder {
 
 	public static AirShoppingRS getAirShoppingRS(HttpEntity entity) throws IOException, JAXBException {
-		String xmlResponse = EntityUtils.toString(entity).replaceAll("2017.2", "2017.1");
+		String xmlResponse = EntityUtils.toString(entity);
+				//.replaceAll("2017.2", "2017.1");
 		JAXBContext jaxbContext =JAXBContext.newInstance(AirShoppingRS.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			InputSource isource = new InputSource(new StringReader(xmlResponse));
@@ -26,7 +27,7 @@ public class AirShoppingRSBuilder {
 	}
 	
 	public static AirShoppingRS getAirShoppingRS(String xmlFile) throws IOException, JAXBException {
-		xmlFile = xmlFile.replaceAll("2017.2", "2017.1");
+		//xmlFile = xmlFile.replaceAll("2017.2", "2017.1");
 		JAXBContext jaxbContext =JAXBContext.newInstance(AirShoppingRS.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			InputSource isource = new InputSource(new StringReader(xmlFile));

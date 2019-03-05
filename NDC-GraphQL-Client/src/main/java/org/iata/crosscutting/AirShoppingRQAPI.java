@@ -33,7 +33,8 @@ public class AirShoppingRQAPI {
 			XMLGregorianCalendar departureDate = GenericCalendar.getXMLGregorianCalendarDate(localdate);
 				AirShoppingRQ airShoppingRQ = AirShoppingRQBuilder.buildAirShoppingRQ_OneWay(departureDate, departureCode, arrivalCode);
 
-			String xmlObject = XMLObjectTool.jaxbObjectToXML(airShoppingRQ).replaceAll("2017.1", "2017.2");
+			String xmlObject = XMLObjectTool.jaxbObjectToXML(airShoppingRQ);
+					//.replaceAll("2017.1", "2017.2");
 			System.out.println(xmlObject);
 
 			HttpPost request = prepareRequest(xmlObject);

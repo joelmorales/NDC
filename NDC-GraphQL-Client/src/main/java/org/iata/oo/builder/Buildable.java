@@ -6,7 +6,7 @@ package org.iata.oo.builder;
  */
 public interface Buildable<T> {
     
-    String VERSION = "IATA2017.1";
+    String VERSION = "IATA2017.2";
     
     T build();
 }
