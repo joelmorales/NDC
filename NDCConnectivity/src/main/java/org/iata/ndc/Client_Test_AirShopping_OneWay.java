@@ -33,7 +33,7 @@ public class Client_Test_AirShopping_OneWay {
 			HttpResponse response = httpClient.execute(request);
 
 			XMLObjectTool.printXMLEntity(response.getEntity());
-			AirShoppingRS airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(response.getEntity());
+			//AirShoppingRS airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(response.getEntity());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

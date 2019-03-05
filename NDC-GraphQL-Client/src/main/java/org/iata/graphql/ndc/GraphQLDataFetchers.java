@@ -87,11 +87,18 @@ public class GraphQLDataFetchers {
 	}
 
 	public DataFetcher getAirShoppingByDate() {
-		airShoppingRS = AirShoppingRQAPI.getStubResponse();
 		return dataFetchingEnvironment -> {
+			String departureCode = dataFetchingEnvironment.getArgument("departureCode");
+			String departureDate = dataFetchingEnvironment.getArgument("departureDate");
+			String arrivalCode = dataFetchingEnvironment.getArgument("arrivalCode");
+			System.out.println("D Code:"+departureCode+", Date:"+departureDate+" ,A Code:"+arrivalCode);
+			
+			//airShoppingRS = AirShoppingRQAPI.getStubResponse(departureCode,departureDate,arrivalCode);
+			airShoppingRS = AirShoppingRQAPI.getResponse(departureCode,departureDate,arrivalCode);
+			
 			airShoppingMap = airShoppingDataMapping.fillAirShoppingDataFetcher(airShoppingRS);
 			System.out.println("Maps Count:" + airShoppingMap.size());
-			String departureCode = dataFetchingEnvironment.getArgument("departureCode");
+			
 			return airShoppingMap.stream()
 					// .filter(air -> air.get("departureCode").equals(departureCode))
 					.findFirst().orElse(null);
