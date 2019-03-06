@@ -18,7 +18,7 @@ ext{
 	jaxbVersion = '2.2.11'
 	jaxwsVersion = '2.2.10'
 	generatedSrcDir = "$buildDir/generated-sources/xjc"
-	//contractJar = "NDCConnectivity.jar"
+	
 }
 
 repositories {
@@ -42,10 +42,8 @@ dependencies {
 	compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
 	//compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-	//compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'// https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc
+	//compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 	compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.3'
-	
-	
 	
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

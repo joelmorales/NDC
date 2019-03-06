@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.iata.configuration.NDCPropertyKeys;
+import org.iata.configuration.PropertiesReaderHelper;
 import org.iata.crosscutting.GenericCalendar;
 import org.iata.crosscutting.ReadResponse;
 import org.iata.crosscutting.XMLObjectTool;
@@ -21,10 +23,12 @@ import org.iata.oo.builder.AirShopping.AirShoppingRQBuilder;
 import org.iata.oo.builder.AirShopping.AirShoppingRSBuilder;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AirShoppingRQAPI {
 
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AirShoppingRQAPI.class);
 	
 	public static AirShoppingRS getResponse(String departureCode, String date, String arrivalCode ) {
 		AirShoppingRS airShoppingRS= new AirShoppingRS();
@@ -36,7 +40,7 @@ public class AirShoppingRQAPI {
 
 			String xmlObject = XMLObjectTool.jaxbObjectToXML(airShoppingRQ);
 					//.replaceAll("2017.1", "2017.2");
-			System.out.println(xmlObject);
+			LOGGER.info(xmlObject);
 
 			HttpPost request = prepareRequest(xmlObject);
 			HttpResponse response = httpClient.execute(request);
@@ -69,9 +73,12 @@ public class AirShoppingRQAPI {
 	}
 
 	private static HttpPost prepareRequest(String xmlObject) throws UnsupportedEncodingException {
-		String api_key = "ne9zq57kbpvaut4z9xxm3aqc";
-		String apiEndPoint = "http://iata.api.mashery.com/Zeus/NDC";
-
+		//String api_key = "ne9zq57kbpvaut4z9xxm3aqc";
+		String api_key = PropertiesReaderHelper.getProperty(NDCPropertyKeys.NDC_API_DEVELOPER_KEY);
+		//String apiEndPoint = "http://iata.api.mashery.com/Zeus/NDC";
+		String apiEndPoint = PropertiesReaderHelper.getProperty(NDCPropertyKeys.NDC_API_ENDPOINT);
+		
+		
 		HttpPost request = new HttpPost(apiEndPoint);
 
 		request.addHeader("content-type", "application/xml;charset=utf-8");

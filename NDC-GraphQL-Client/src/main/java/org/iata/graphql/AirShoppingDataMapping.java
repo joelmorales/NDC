@@ -12,13 +12,16 @@ import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS.OffersGroup.AirlineOffers;
 import org.iata.oo.schema.AirShoppingRS.ListOfFlightSegmentType;
 import org.iata.oo.schema.AirShoppingRS.ServiceDefinitionType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableMap;
 
 @Component
 public class AirShoppingDataMapping {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(AirShoppingDataMapping.class);
+	
 	public List<Map<String, String>> fillAirShoppingDataFetcher(AirShoppingRS airSRS) {
 		Map<String, String> airShopping=new HashMap<String, String>();
 		
@@ -79,8 +82,8 @@ public class AirShoppingDataMapping {
 				name = serviceDefinitionRef.getName().getValue();
 				desc = serviceDefinitionRef.getDescriptions().getDescription().get(0).getText().getValue();
 				serviceRef = serviceDefinitionRef.getServiceDefinitionID().toString();
-				//System.out.println("serviceDefinition Ref:" + serviceRef + " , Unit:" + unitPrice + " ,Amount:"
-				//		+ totalAmount + " , Name" + name + " , Desc:" + desc);
+				LOGGER.debug("serviceDefinition Ref:" + serviceRef + " , Unit:" + unitPrice + " ,Amount:"
+						+ totalAmount + " , Name" + name + " , Desc:" + desc);
 
 				for (Object refs : alaCarte.getEligibility().getSegmentRefs().getValue()) {
 
@@ -88,7 +91,7 @@ public class AirShoppingDataMapping {
 					key = serviceRef + type.getSegmentKey();
 
 					if (!checkList.contains(key) && type.getSegmentKey().equals(sortSegmentKey)) {
-						//System.out.println(" Segments ref:" + type.getSegmentKey());
+						LOGGER.debug(" Segments ref:" + type.getSegmentKey());
 						checkList.add(key);
 
 						aLaCarteoffers.add(
@@ -107,8 +110,6 @@ public class AirShoppingDataMapping {
 		}
 		return aLaCarteoffers;
 	}
-	
-	
 	
 	public List<Map<String, String>> fillArrivalsListDataFetcher(AirShoppingRS airSRS) {
 		List<Map<String, String>> arrivals = new ArrayList<Map<String, String>>();

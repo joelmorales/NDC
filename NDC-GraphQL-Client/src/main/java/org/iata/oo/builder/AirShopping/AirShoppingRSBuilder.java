@@ -10,10 +10,14 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 public class AirShoppingRSBuilder {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AirShoppingRSBuilder.class);
+	
 	public static AirShoppingRS getAirShoppingRS(HttpEntity entity) throws IOException, JAXBException {
 		String xmlResponse = EntityUtils.toString(entity);
 				//.replaceAll("2017.2", "2017.1");
@@ -22,7 +26,7 @@ public class AirShoppingRSBuilder {
 			InputSource isource = new InputSource(new StringReader(xmlResponse));
 		
 		AirShoppingRS responseAirShoppingRS = (AirShoppingRS) jaxbUnmarshaller.unmarshal(isource);
-		//System.out.println(responseAirShoppingRS.toString());
+		LOGGER.debug(responseAirShoppingRS.toString());
 		return responseAirShoppingRS;
 	}
 	
@@ -33,7 +37,7 @@ public class AirShoppingRSBuilder {
 			InputSource isource = new InputSource(new StringReader(xmlFile));
 		
 		AirShoppingRS responseAirShoppingRS = (AirShoppingRS) jaxbUnmarshaller.unmarshal(isource);
-		//System.out.println(responseAirShoppingRS.toString());
+		LOGGER.debug(responseAirShoppingRS.toString());
 		return responseAirShoppingRS;
 		
 	}
