@@ -31,3 +31,5 @@ target/**
 NDC-GraphQL-Client/.DS_Store
 .DS_Store
 /.DS_Store
+**/generated-sources/
+generated-sources/**
