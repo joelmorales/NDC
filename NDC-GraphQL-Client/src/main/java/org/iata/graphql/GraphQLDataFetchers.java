@@ -1,4 +1,4 @@
-package org.iata.graphql.ndc;
+package org.iata.graphql;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.iata.crosscutting.AirShoppingDataMapping;
-import org.iata.crosscutting.AirShoppingRQAPI;
+import org.iata.ndc.AirShoppingRQAPI;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

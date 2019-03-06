@@ -1,4 +1,4 @@
-package org.iata.crosscutting;
+package org.iata.ndc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,8 +14,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.iata.oo.builder.AirShoppingRQBuilder;
-import org.iata.oo.builder.AirShoppingRSBuilder;
+import org.iata.crosscutting.GenericCalendar;
+import org.iata.crosscutting.ReadResponse;
+import org.iata.crosscutting.XMLObjectTool;
+import org.iata.oo.builder.AirShopping.AirShoppingRQBuilder;
+import org.iata.oo.builder.AirShopping.AirShoppingRSBuilder;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 
@@ -24,12 +27,10 @@ public class AirShoppingRQAPI {
 	
 	
 	public static AirShoppingRS getResponse(String departureCode, String date, String arrivalCode ) {
-		//CloseableHttpClient httpClient = HttpClientBuilder.create().setUserAgent("TestClient").build();
 		AirShoppingRS airShoppingRS= new AirShoppingRS();
 		
-		LocalDate localdate = LocalDate.parse(date);
-		
 		try(CloseableHttpClient httpClient = HttpClientBuilder.create().setUserAgent("TestClient").build()) {
+			LocalDate localdate = LocalDate.parse(date);
 			XMLGregorianCalendar departureDate = GenericCalendar.getXMLGregorianCalendarDate(localdate);
 				AirShoppingRQ airShoppingRQ = AirShoppingRQBuilder.buildAirShoppingRQ_OneWay(departureDate, departureCode, arrivalCode);
 
@@ -39,8 +40,6 @@ public class AirShoppingRQAPI {
 
 			HttpPost request = prepareRequest(xmlObject);
 			HttpResponse response = httpClient.execute(request);
-
-			//XMLObjectTool.printXMLEntity(response.getEntity());
 			airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(response.getEntity());
 			
 		} catch (Exception ex) {
@@ -65,7 +64,7 @@ public class AirShoppingRQAPI {
 			return prepareAirShoppingData(sb.toString());
 
 		} catch (Exception ex) {
-			throw new RuntimeException("Probles: " + ex.toString());
+			throw new RuntimeException("Problems: " + ex.toString());
 		}
 	}
 

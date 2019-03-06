@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-class Initializer {
+public class Initializer {
 	private static final Class[] CLASSES_TO_SKIP = {
 			Boolean.class,
 			String.class,

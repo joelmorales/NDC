@@ -1,4 +1,4 @@
-package org.iata.oo.builder;
+package org.iata.oo.builder.AirShopping;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -22,7 +22,7 @@ public class AirShoppingRSBuilder {
 			InputSource isource = new InputSource(new StringReader(xmlResponse));
 		
 		AirShoppingRS responseAirShoppingRS = (AirShoppingRS) jaxbUnmarshaller.unmarshal(isource);
-		System.out.println(responseAirShoppingRS.toString());
+		//System.out.println(responseAirShoppingRS.toString());
 		return responseAirShoppingRS;
 	}
 	
@@ -33,7 +33,7 @@ public class AirShoppingRSBuilder {
 			InputSource isource = new InputSource(new StringReader(xmlFile));
 		
 		AirShoppingRS responseAirShoppingRS = (AirShoppingRS) jaxbUnmarshaller.unmarshal(isource);
-		System.out.println(responseAirShoppingRS.toString());
+		//System.out.println(responseAirShoppingRS.toString());
 		return responseAirShoppingRS;
 		
 	}

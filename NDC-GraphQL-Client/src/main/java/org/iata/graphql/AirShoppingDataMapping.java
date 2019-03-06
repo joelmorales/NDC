@@ -1,4 +1,4 @@
-package org.iata.crosscutting;
+package org.iata.graphql;
 
 import java.util.ArrayList;
 import java.util.Arrays;

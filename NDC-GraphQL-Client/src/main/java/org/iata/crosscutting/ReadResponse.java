@@ -15,7 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.iata.oo.builder.AirShoppingRSBuilder;
+import org.iata.oo.builder.AirShopping.AirShoppingRSBuilder;
 import org.iata.oo.schema.AirShoppingRS.ALaCarteOfferItemType;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS;
 import org.iata.oo.schema.AirShoppingRS.AirShoppingRS.DataLists.FlightList.Flight;

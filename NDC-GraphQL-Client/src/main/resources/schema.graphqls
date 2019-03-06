@@ -1,5 +1,7 @@
 type Query{
-	airShoppingByDate(departureCode: String,departureDate: String, arrivalCode: String): AirShopping
+	airShoppingByDate(departureCode: String
+	departureDate: String
+	arrivalCode: String): AirShopping
 }
 
 type AirShopping{

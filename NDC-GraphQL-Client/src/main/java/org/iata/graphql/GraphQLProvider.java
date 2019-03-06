@@ -1,4 +1,4 @@
-package org.iata.graphql.ndc;
+package org.iata.graphql;
 
 import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 

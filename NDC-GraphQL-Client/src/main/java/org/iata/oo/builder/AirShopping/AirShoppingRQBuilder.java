@@ -1,10 +1,12 @@
-package org.iata.oo.builder;
+package org.iata.oo.builder.AirShopping;
 
 import java.math.BigInteger;
 
 //import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.iata.oo.builder.Buildable;
+import org.iata.oo.builder.Initializer;
 import org.iata.oo.schema.AirShoppingRQ.AgencyIDType;
 import org.iata.oo.schema.AirShoppingRQ.AggregatorIDType;
 import org.iata.oo.schema.AirShoppingRQ.AggregatorParticipantType;
