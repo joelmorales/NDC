@@ -33,8 +33,6 @@ import org.iata.oo.schema.AirShoppingRQ.MsgPartiesType.Sender;
 import org.iata.oo.schema.AirShoppingRQ.PassengerType;
 import org.iata.oo.schema.AirShoppingRQ.TravelAgencySenderType;
 
-//import com.sun.xml.internal.ws.org.objectweb.asm.Type;
-
 public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 
 	private AirShoppingRQ request;
@@ -157,8 +155,8 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		travelAgency.setName(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_NAME));
 		travelAgency.setIATANumber(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_IATA_NUMBER));
 		AgencyIDType agencyID = new AgencyIDType();
-		// agencyID.setOwner("Z9");
-		agencyID.setValue(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_ID));
+		agencyID.setOwner(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_OWNER));
+		agencyID.setValue(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_VALUE));
 		travelAgency.setAgencyID(agencyID);
 		sender.setTravelAgencySender(travelAgency);
 

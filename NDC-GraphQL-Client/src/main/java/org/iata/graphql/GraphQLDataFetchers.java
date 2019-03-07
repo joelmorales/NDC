@@ -11,10 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import graphql.GraphQLException;
 import graphql.schema.DataFetcher;
 
 @Component
 public class GraphQLDataFetchers {
+
+	private static final String SEGMENT_KEY = "segmentKey";
 
 	@Autowired
 	private AirShoppingDataMapping airShoppingDataMapping;
@@ -32,7 +35,8 @@ public class GraphQLDataFetchers {
 	public DataFetcher getAlaCarteOffers() {
 		return dataFetchingEnvironment ->{
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
-			String segmentKey = depar.get("segmentKey");
+			String segmentKey = depar.get(SEGMENT_KEY);
+			//String mealMatch = depar.get("mealMatch");
 			
 			aLaCarteoffersMap = airShoppingDataMapping.fillAlaCarteOffersDataFetcher(airShoppingRS,segmentKey);
 			LOGGER.debug("A La carte List Count:" + aLaCarteoffersMap.size());
@@ -54,27 +58,28 @@ public class GraphQLDataFetchers {
 	public DataFetcher getDepartures() {
 		return dataFetchingEnvironment -> {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
-			String segmentKey = depar.get("segmentKey");
+			String segmentKey = depar.get(SEGMENT_KEY);
 			
 			departureMap=airShoppingDataMapping.fillDeparturesListDataFetcher(airShoppingRS);
 			LOGGER.debug("Departure List Count:" + departureMap.size());
 			return departureMap.stream()
-					.filter(d -> d.get("segmentKey").equals(segmentKey))
+					.filter(d -> d.get(SEGMENT_KEY).equals(segmentKey))
 					.findFirst()
-					.orElse(null);
+					.orElseThrow(() ->new GraphQLException("Segment Key"+segmentKey));
+					//.orElse(null);
 			};
 	}
 	
 	public DataFetcher getArrivals() {
 		return dataFetchingEnvironment -> {
 			Map<String, String> depar = dataFetchingEnvironment.getSource();
-			String segmentKey = depar.get("segmentKey");
+			String segmentKey = depar.get(SEGMENT_KEY);
 			arrivalMap = airShoppingDataMapping.fillArrivalsListDataFetcher(airShoppingRS);
 			LOGGER.debug("Arrivals List Count:" + arrivalMap.size());
 			return arrivalMap.stream()
-					.filter(d -> d.get("segmentKey").equals(segmentKey))
+					.filter(d -> d.get(SEGMENT_KEY).equals(segmentKey))
 					.findFirst()
-					.orElse(null);
+					.orElseThrow(() ->new GraphQLException("Segment Key"+segmentKey));
 			};
 	}
 
@@ -92,7 +97,8 @@ public class GraphQLDataFetchers {
 			LOGGER.debug("AirShopping Object Count:" + airShoppingMap.size());
 			
 			return airShoppingMap.stream()
-					.findFirst().orElse(null);
+					.findFirst()
+					.orElseThrow(() ->new GraphQLException("Parameters - Dept Code:"+departureCode+", Date:"+departureDate+" ,Arrival Code:"+arrivalCode));
 		};
 	}
 

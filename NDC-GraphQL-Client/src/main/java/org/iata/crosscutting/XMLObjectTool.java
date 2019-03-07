@@ -13,6 +13,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
+import org.iata.crosscutting.exception.BussinessLogicException;
+import org.iata.crosscutting.exception.EndPointException;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -36,7 +38,7 @@ public class XMLObjectTool {
 			xmlString = sw.toString();
 
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			throw new BussinessLogicException(e.getMessage());
 		}
 
 		return xmlString;

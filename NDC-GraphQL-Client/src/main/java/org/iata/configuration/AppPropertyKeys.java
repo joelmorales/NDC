@@ -11,7 +11,8 @@ public class AppPropertyKeys {
 	
 	public static final String TRAVEL_AGENCY_NAME = "travel.agency.name";
 	public static final String TRAVEL_AGENCY_IATA_NUMBER ="travel.agency.iata.number";
-	public static final String TRAVEL_AGENCY_ID ="travel.agency.id";
+	public static final String TRAVEL_AGENCY_VALUE ="travel.agency.id.value";
+	public static final String TRAVEL_AGENCY_OWNER = "travel.agency.owner";
 	
 	public static final String AGGREGATOR_NAME ="aggregator.name";
 	public static final String AGGREGATOR_NUMBER ="aggregator.number";

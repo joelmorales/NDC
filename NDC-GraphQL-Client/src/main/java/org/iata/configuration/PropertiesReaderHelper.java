@@ -3,6 +3,7 @@ package org.iata.configuration;
 import java.util.Optional;
 import java.util.Properties;
 
+import org.iata.crosscutting.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -23,15 +24,14 @@ public class PropertiesReaderHelper {
 		try {
 			properties = PropertiesLoaderUtils.loadProperties(resource);
 		}catch(Exception ex) {
-			throw new RuntimeException("Load Properties Error:"+ex.getMessage());
+			throw new ApplicationException("Load Properties Error:"+ex.getMessage());
 		}
 	}
 	
 	public static String getProperty(final String propertyKey) {
 		LOGGER.info("Get Property for:"+propertyKey);
 		return Optional.ofNullable(properties.getProperty(propertyKey)).orElseThrow(()->
-		
-			 new RuntimeException("Property not found")
+			 new ApplicationException("Property not found.")
 		);
 	}
 	

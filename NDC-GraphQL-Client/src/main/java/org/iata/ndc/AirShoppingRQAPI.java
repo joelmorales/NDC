@@ -19,6 +19,8 @@ import org.iata.configuration.PropertiesReaderHelper;
 import org.iata.crosscutting.GenericCalendar;
 import org.iata.crosscutting.ReadResponse;
 import org.iata.crosscutting.XMLObjectTool;
+import org.iata.crosscutting.exception.ApplicationException;
+import org.iata.crosscutting.exception.EndPointException;
 import org.iata.oo.builder.AirShopping.AirShoppingRQBuilder;
 import org.iata.oo.builder.AirShopping.AirShoppingRSBuilder;
 import org.iata.oo.schema.AirShoppingRQ.AirShoppingRQ;
@@ -48,7 +50,7 @@ public class AirShoppingRQAPI {
 			airShoppingRS=AirShoppingRSBuilder.getAirShoppingRS(response.getEntity());
 			
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			throw new EndPointException(ex.getMessage());
 		} 
 		return airShoppingRS;
 	}
@@ -69,7 +71,7 @@ public class AirShoppingRQAPI {
 			return prepareAirShoppingData(sb.toString());
 
 		} catch (Exception ex) {
-			throw new RuntimeException("Problems: " + ex.toString());
+			throw new EndPointException(ex.getMessage());
 		}
 	}
 

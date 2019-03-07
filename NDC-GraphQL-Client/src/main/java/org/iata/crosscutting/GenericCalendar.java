@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.iata.crosscutting.exception.BussinessLogicException;
+
 public class GenericCalendar {
 
 	public static XMLGregorianCalendar getXMLGregorianCalendarDate(LocalDate date) {	
@@ -16,7 +18,7 @@ public class GenericCalendar {
 			departureDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
 
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			throw new BussinessLogicException(e1.getMessage());
 		}
 		return departureDate;
 	}
