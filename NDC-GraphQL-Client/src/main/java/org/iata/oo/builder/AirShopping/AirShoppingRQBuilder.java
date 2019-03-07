@@ -5,6 +5,8 @@ import java.math.BigInteger;
 //import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.iata.configuration.AppPropertyKeys;
+import org.iata.configuration.PropertiesReaderHelper;
 import org.iata.oo.builder.Buildable;
 import org.iata.oo.builder.Initializer;
 import org.iata.oo.schema.AirShoppingRQ.AgencyIDType;
@@ -55,8 +57,8 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 	public AirShoppingRQBuilder addDocument() {
 
 		MsgDocumentType document = new MsgDocumentType();
-		document.setName("KRONOS NDC GATEWAY");
-		document.setReferenceVersion("1.0");
+		document.setName(PropertiesReaderHelper.getProperty(AppPropertyKeys.NDC_GATEWAY_NAME));
+		document.setReferenceVersion(PropertiesReaderHelper.getProperty(AppPropertyKeys.NDC_GATEWAY_REFERENCE_VERSION));
 
 		request.setDocument(document);
 
@@ -152,21 +154,21 @@ public class AirShoppingRQBuilder implements Buildable<AirShoppingRQ> {
 		Sender sender = new Sender();
 
 		TravelAgencySenderType travelAgency = new TravelAgencySenderType();
-		travelAgency.setName("JR TECHNOLOGIES");
-		travelAgency.setIATANumber("20200154");
+		travelAgency.setName(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_NAME));
+		travelAgency.setIATANumber(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_IATA_NUMBER));
 		AgencyIDType agencyID = new AgencyIDType();
 		// agencyID.setOwner("Z9");
-		agencyID.setValue("00010080");
+		agencyID.setValue(PropertiesReaderHelper.getProperty(AppPropertyKeys.TRAVEL_AGENCY_ID));
 		travelAgency.setAgencyID(agencyID);
 		sender.setTravelAgencySender(travelAgency);
 
 		MsgPartiesType.Participants participants = new Participants();
 		Participant participant = new Participant();
 		AggregatorParticipantType aggregator = new AggregatorParticipantType();
-		aggregator.setSequenceNumber(new BigInteger("1"));
-		aggregator.setName("JR TECHNOLOGIES");
+		aggregator.setSequenceNumber(new BigInteger(PropertiesReaderHelper.getProperty(AppPropertyKeys.AGGREGATOR_SEQUENCE_NUM)));
+		aggregator.setName(PropertiesReaderHelper.getProperty(AppPropertyKeys.AGGREGATOR_NAME));
 		AggregatorIDType aggregatorType = new AggregatorIDType();
-		aggregatorType.setValue("88888888");
+		aggregatorType.setValue(PropertiesReaderHelper.getProperty(AppPropertyKeys.AGGREGATOR_NUMBER));
 		aggregator.setAggregatorID(aggregatorType);
 
 		participant.setAggregatorParticipant(aggregator);

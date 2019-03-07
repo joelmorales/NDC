@@ -3,11 +3,14 @@ package org.iata.configuration;
 import java.util.Optional;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class PropertiesReaderHelper {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesReaderHelper.class);
 	private final static String servicePropertiesFile = "service.properties";
 	private static Properties properties;
 	
@@ -25,10 +28,11 @@ public class PropertiesReaderHelper {
 	}
 	
 	public static String getProperty(final String propertyKey) {
-		return Optional.ofNullable(properties.getProperty(propertyKey)).orElseThrow( ()->
-		{
-			throw new RuntimeException("Property not found");
-		});
+		LOGGER.info("Get Property for:"+propertyKey);
+		return Optional.ofNullable(properties.getProperty(propertyKey)).orElseThrow(()->
+		
+			 new RuntimeException("Property not found")
+		);
 	}
 	
 }
