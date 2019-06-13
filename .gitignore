@@ -4,6 +4,8 @@
 *.class
 *.class
 ONEOrder/.DS_Store
+.DS_Store
+*.DS_Store
 *.class
 *.class
 NDC-Connectivity/.classpath
