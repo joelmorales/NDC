@@ -48,7 +48,7 @@ public class AirShoppingDataMapping {
 			departures.add(
 					ImmutableMap.of(
 					 	"segmentKey",getValue(flight.getSegmentKey()),
-						"airporCode", getValue(flight.getDeparture().getAirportCode().getValue()),
+						"airportCode", getValue(flight.getDeparture().getAirportCode().getValue()),
 						"date",getValue(flight.getDeparture().getDate().toString()),
 						"time",getValue(flight.getDeparture().getTime()),
 						"airportName",getValue(flight.getDeparture().getAirportCode().getValue())
@@ -117,7 +117,7 @@ public class AirShoppingDataMapping {
 			arrivals.add(
 					ImmutableMap.of(
 					 	"segmentKey",getValue(flight.getSegmentKey()),
-						"airporCode", getValue(flight.getArrival().getAirportCode().getValue()),
+						"airportCode", getValue(flight.getArrival().getAirportCode().getValue()),
 						"date",getValue(flight.getArrival().getDate().toString()),
 						"time",getValue(flight.getArrival().getTime()),
 						"airportName",getValue(flight.getArrival().getAirportCode().getValue())

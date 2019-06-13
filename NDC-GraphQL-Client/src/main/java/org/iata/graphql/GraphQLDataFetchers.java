@@ -90,8 +90,8 @@ public class GraphQLDataFetchers {
 			String arrivalCode = dataFetchingEnvironment.getArgument("arrivalCode");
 			LOGGER.debug("Parameters - Dept Code:"+departureCode+", Date:"+departureDate+" ,Arrival Code:"+arrivalCode);
 			
-			//airShoppingRS = AirShoppingRQAPI.getStubResponse(departureCode,departureDate,arrivalCode);
-			airShoppingRS = AirShoppingRQAPI.getResponse(departureCode,departureDate,arrivalCode);
+			airShoppingRS = AirShoppingRQAPI.getStubResponse(departureCode,departureDate,arrivalCode);
+			//airShoppingRS = AirShoppingRQAPI.getResponse(departureCode,departureDate,arrivalCode);
 			
 			airShoppingMap = airShoppingDataMapping.fillAirShoppingDataFetcher(airShoppingRS);
 			LOGGER.debug("AirShopping Object Count:" + airShoppingMap.size());

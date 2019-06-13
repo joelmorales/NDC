@@ -31,7 +31,7 @@ type AlaCarteOffer{
 
 type Departure{
 	segmentKey: String
-	airporCode: String
+	airportCode: String
 	date: String
 	time: String
 	airportName: String
@@ -39,7 +39,7 @@ type Departure{
 
 type Arrival{
 	segmentKey: String
-	airporCode: String
+	airportCode: String
 	date: String
 	time: String
 	airportName: String
